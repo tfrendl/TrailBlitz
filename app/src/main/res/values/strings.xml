@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">TrailBlitz</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="need_an_account">Need an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="trailblitz_login">TrailBlitz Login</string>
+    <string name="welcome">Welcome!</string>
+    <string name="showusername">showUsername</string>
+    <string name="inventory">Inventory</string>
+    <string name="cart">Cart</string>
+    <string name="past_orders">Past Orders</string>
+    <string name="update_password">Update Password</string>
+    <string name="admin_controls">Admin Controls</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="order_history">Order History</string>
+    <string name="logout">Would you like to sign out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>
