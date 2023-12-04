@@ -2,6 +2,7 @@ package com.example.trailblitz;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +10,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.trailblitz.db.AppDatabase;
 import com.example.trailblitz.db.TrailBlitzDAO;
 
 import java.util.List;
@@ -24,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
     private Button mAdminControlsButton;
     private Button mUpdatePasswordButton;
     private Button mSignOutButton;
+    private TextView mUserNameTextView;
 
     private TrailBlitzDAO mTrailBlitzDAO;
     private int mUserId = -1;   // default value when there is no user yet defined
     private SharedPreferences mPreferences = null;
+    private User mUser;
 
 
 
@@ -53,9 +58,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        updateUsernameDisplay();
+        getDatabase();
+        checkForUser();
+        loginUser(mUserId);
+        updateUsernameDisplay();    // TODO
         wireupDisplay();
 
+    }
+
+    private void loginUser(int userId) {
+        mUser = mTrailBlitzDAO.getUserByUserId(userId);
+        addUserToPreference(userId);
+        invalidateOptionsMenu();
+    }
+
+    private void getDatabase() {
+        mTrailBlitzDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries()       // generally do not want to do on main thread
+                .build()                        // constructs
+                .getTrailBlitzDAO();                // returns our instance - makes sure only one instance at a time
     }
 
     private void checkForUser() {
@@ -79,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         List<User> users = mTrailBlitzDAO.getAllUsers();
         // if there are no users, make a default user
         if (users.size() <= 0) {
-            User defaultUser = new User("testuser1","testuser1", "no");
-            User altUser = new User("admin2","admin2", "yes");
+            User defaultUser = new User("testuser1","testuser1", false);
+            User altUser = new User("admin2","admin2", true);
             mTrailBlitzDAO.insert(defaultUser, altUser);
         }
 
@@ -100,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
      * <p>
      */
     private void updateUsernameDisplay() {
+
         // TODO: Finish the implementation for updating the displayed username
     }
 
@@ -121,12 +143,22 @@ public class MainActivity extends AppCompatActivity {
      * method to successfully wire up the display elements.
      */
     private void wireupDisplay(){
+        mAdminControlsButton = findViewById(R.id.buttonAdminControls);
+
+        // only show admin button if user is an admin
+        if(mUser.getIsAdmin()) {
+            mAdminControlsButton.setVisibility(View.VISIBLE);
+        } else {
+            mAdminControlsButton.setVisibility(View.INVISIBLE);
+        }
         mInventoryButton = findViewById(R.id.buttonInventory);
         mCartButton = findViewById(R.id.buttonCart);
         mOrderHistoryButton = findViewById(R.id.buttonPastOrders);
-        mAdminControlsButton = findViewById(R.id.buttonAdminControls);
         mUpdatePasswordButton = findViewById(R.id.buttonUpdatePassword);
         mSignOutButton = findViewById(R.id.buttonSignOut);
+        mUserNameTextView = findViewById(R.id.textViewUsername);
+
+        mUserNameTextView.setText(mUser.getUserName());     // show username
 
         // Set up click listener for the Inventory Button
         mInventoryButton.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +223,10 @@ public class MainActivity extends AppCompatActivity {
 
         alertBuilder.setPositiveButton(getString(R.string.yes),
                 (dialog, which) -> {
+                    clearUserFromIntent();
+                    clearUserFromPref();
+                    mUserId = -1;
+                    checkForUser();
                     // TODO: Finish the implementation for logging the user out
                     // TODO: the next two lines should probably get moved there
                     Intent intent = LoginActivity.intentFactory(this);
@@ -201,6 +237,23 @@ public class MainActivity extends AppCompatActivity {
                     // we don't really need to do anything here
                 });
         alertBuilder.create().show();
+    }
+
+    private void clearUserFromPref() {
+        addUserToPreference(-1);
+    }
+
+    private void addUserToPreference(int userId) {
+        if(mPreferences == null) {
+            getPrefs();
+        }
+        SharedPreferences.Editor editor = mPreferences.edit();      // singleton pattern
+        editor.putInt(USER_ID_KEY, userId);
+        editor.apply();
+    }
+
+    private void clearUserFromIntent() {
+        getIntent().putExtra(USER_ID_KEY, -1);
     }
 
     /**

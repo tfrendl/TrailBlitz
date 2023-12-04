@@ -13,9 +13,9 @@ public class User {
 
     private String mUserName;
     private String mPassword;
-    private String mIsAdmin;
+    private boolean mIsAdmin;
 
-    public User(String mUserName, String mPassword, String mIsAdmin) {
+    public User(String mUserName, String mPassword, boolean mIsAdmin) {
         this.mUserName = mUserName;
         this.mPassword = mPassword;
         this.mIsAdmin = mIsAdmin;
@@ -45,11 +45,11 @@ public class User {
         this.mPassword = password;
     }
 
-    public String getIsAdmin() {
+    public boolean getIsAdmin() {
         return mIsAdmin;
     }
 
-    public void setIsAdmin(String isAdmin) {
+    public void setIsAdmin(boolean isAdmin) {
         this.mIsAdmin = isAdmin;
     }
 }
