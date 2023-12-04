@@ -11,7 +11,7 @@ package com.example.trailblitz.db;
 
 /**
  * @author Talia Frendl
- * @since  November 30, 2023
+ * @since  December 4, 2023
  * Assignment: Project 02: Part 02 Login and Landing Page
  * Used ChatGPT to help write javadoc comments.
  * Data Access Object (DAO) interface for interacting with the TrailBlitz and User entities in the database.

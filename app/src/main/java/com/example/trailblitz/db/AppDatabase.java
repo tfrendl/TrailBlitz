@@ -7,7 +7,7 @@ import com.example.trailblitz.User;
 
 /**
  * @author Talia Frendl
- * @since  November 30, 2023
+ * @since  December 4, 2023
  * Assignment: Project 02: Part 02 Login and Landing Page
  * Used ChatGPT to help write javadoc comments.
  * Room Database class for the TrailBlitz application.
