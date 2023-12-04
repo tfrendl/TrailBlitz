@@ -47,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        wireupDisplay();
         getDatabase();
+        wireupDisplay();
     }
 
     /**
@@ -105,12 +105,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Validates the entered password against the stored user password.
-     *
-     * @return True if the password is valid, false otherwise.
+     * Retrieves the username and password values entered in the UI fields.
      */
-    private boolean validatePassword() {
-        return mUser.getPassword().equals(mPassword);
+    private void getValuesFromDisplay() {
+        mUsername = mUsernameField.getText().toString();
+        mPassword = mPasswordField.getText().toString();
     }
 
     /**
@@ -128,11 +127,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Retrieves the username and password values entered in the UI fields.
+     * Validates the entered password against the stored user password.
+     *
+     * @return True if the password is valid, false otherwise.
      */
-    private void getValuesFromDisplay() {
-        mUsername = mUsernameField.getText().toString();
-        mPassword = mPasswordField.getText().toString();
+    private boolean validatePassword() {
+        return mUser.getPassword().equals(mPassword);
     }
 
     /**
