@@ -3,7 +3,6 @@ package com.example.trailblitz;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,16 +10,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.trailblitz.db.AppDatabase;
 import com.example.trailblitz.db.TrailBlitzDAO;
-
 import java.util.List;
 
+/**
+ * @author Talia Frendl
+ * @since  November 30, 2023
+ * Assignment: Project 02: Part 02 Login and Landing Page
+ * Used ChatGPT to help write javadoc comments.
+ * MainActivity represents the main screen of the TrailBlitz application for authenticated users.
+ * It provides access to various features such as viewing inventory, managing the shopping cart,
+ * accessing order history, and administrative controls (if the user is an admin).
+ * The class handles user authentication, UI initialization, and button click events for navigation.
+ */
 public class MainActivity extends AppCompatActivity {
-
+    // constants for intent extra keys and preferences
     private static final String USER_ID_KEY = "com.example.trailblitz.userIdKey";
     private static final String PREFERENCES_KEY = "com.example.trailblitz.PREFERENCES_KEY";
+
+    // UI elements
     private Button mInventoryButton;
     private Button mCartButton;
     private Button mOrderHistoryButton;
@@ -29,29 +38,19 @@ public class MainActivity extends AppCompatActivity {
     private Button mSignOutButton;
     private TextView mUserNameTextView;
 
+    // Database and user-related fields
     private TrailBlitzDAO mTrailBlitzDAO;
     private int mUserId = -1;   // default value when there is no user yet defined
     private SharedPreferences mPreferences = null;
     private User mUser;
 
-
-
-
     /**
-     * Called when the activity is first created. This method is responsible for
-     * initializing the activity's user interface, setting the content view,
-     * and wiring up display elements. It is called after the activity is
-     * created but before it becomes visible to the user.
-     * <p>
-     * In this implementation:
-     * - The content view is set to the layout defined in {@code R.layout.activity_main}.
-     * - The {@code updateUsernameDisplay()} method is called to initialize and display the username.
-     * - The {@code wireupDisplay()} method is called to associate UI elements with their views
-     *   and set up event listeners for specific buttons.
-     * <p>
-     * @param savedInstanceState If the activity is being re-initialized after
-     *                           previously being shut down, this Bundle contains the
-     *                           data it most recently supplied in onSaveInstanceState(Bundle).
+     * Called when the activity is first created. Initializes the activity's UI, sets the content view,
+     * and wires up display elements. This method is called after the activity is created but before
+     * it becomes visible to the user.
+     *
+     * @param savedInstanceState If the activity is being re-initialized, this Bundle contains
+     *                           the data it most recently supplied in onSaveInstanceState(Bundle).
      *                           Otherwise, it is null.
      */
     @Override
@@ -61,17 +60,24 @@ public class MainActivity extends AppCompatActivity {
         getDatabase();
         checkForUser();
         loginUser(mUserId);
-        updateUsernameDisplay();    // TODO
         wireupDisplay();
-
     }
 
+    /**
+     * Logs in the user based on the provided user ID and retrieves the user's information.
+     *
+     * @param userId The user ID used to log in the user.
+     */
     private void loginUser(int userId) {
         mUser = mTrailBlitzDAO.getUserByUserId(userId);
         addUserToPreference(userId);
         invalidateOptionsMenu();
     }
 
+    /**
+     * Initializes the TrailBlitzDAO by building the Room database instance.
+     * This method allows database operations on the main thread for simplicity.
+     */
     private void getDatabase() {
         mTrailBlitzDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()       // generally do not want to do on main thread
@@ -79,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 .getTrailBlitzDAO();                // returns our instance - makes sure only one instance at a time
     }
 
+    /**
+     * Checks for a user in the intent or preferences. If not found, redirects to the login screen.
+     */
     private void checkForUser() {
         mUserId = getIntent().getIntExtra(USER_ID_KEY, -1); // if theres an extra, it becomes USER_ID_KEY
         // if there isn't an extra, it's -1
@@ -109,38 +118,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Initializes shared preferences.
+     */
     private void getPrefs() {
         mPreferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
-    /**
-     * Update the displayed username in the user interface.
-     * This method is intended to be called when the username associated
-     * with the current user changes. It should handle updating the UI elements
-     * that show the username to reflect the updated information.
-     * <p>
-     */
-    private void updateUsernameDisplay() {
-
-        // TODO: Finish the implementation for updating the displayed username
-    }
 
     /**
      * Wire up the display elements by associating them with their respective views
      * and setting up event listeners for specific buttons.
-     * This method initializes the following UI elements:
-     * - Inventory Button
-     * - Cart Button
-     * - Order History Button
-     * - Admin Controls Button
-     * - Update Password Button
-     * - Sign Out Button
-     * Additionally, it sets up a click listener for the Sign Out Button to handle the
-     * user logout functionality.
-     * <p>
-     * Note: Make sure the corresponding layout XML file contains the necessary views
-     * with the specified IDs (R.id.buttonInventory, R.id.buttonCart, etc.) for this
-     * method to successfully wire up the display elements.
+     * This method initializes UI elements for inventory, cart, order history, admin controls, etc.
+     * It sets up click listeners for these buttons to handle navigation or other functionalities.
      */
     private void wireupDisplay(){
         mAdminControlsButton = findViewById(R.id.buttonAdminControls);
@@ -210,11 +200,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Prompt the user with an AlertDialog to confirm logout and handle the user's response.
-     * This method creates an AlertDialog with a message confirming the user's intent to logout.
-     * It provides positive and negative buttons for the user to confirm or cancel the logout action.
-     * The positive button is set up to execute the necessary logic to log the user out when clicked.
-     * <p>
+     * Logs out the user by displaying a confirmation dialog and handling the user's response.
+     * Clears the user information from intent, preferences, and performs necessary actions.
      */
     private void logoutUser() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
@@ -239,10 +226,18 @@ public class MainActivity extends AppCompatActivity {
         alertBuilder.create().show();
     }
 
+    /**
+     * Clears the user information from shared preferences.
+     */
     private void clearUserFromPref() {
         addUserToPreference(-1);
     }
 
+    /**
+     * Adds the user ID to shared preferences.
+     *
+     * @param userId The user ID to be added to preferences.
+     */
     private void addUserToPreference(int userId) {
         if(mPreferences == null) {
             getPrefs();
@@ -252,15 +247,16 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * Clears the user information from the intent.
+     */
     private void clearUserFromIntent() {
         getIntent().putExtra(USER_ID_KEY, -1);
     }
 
     /**
-     * Create an Intent for launching the MainActivity with the specified user ID as an extra.
-     * This factory method simplifies the process of creating an Intent for starting the MainActivity
-     * with the provided user ID as an extra. The calling component can use this Intent to navigate
-     * to the MainActivity while passing necessary user-related information.
+     * Factory method for creating an Intent to launch the MainActivity with the specified user ID as an extra.
+     * This method simplifies the process of creating an Intent for starting the MainActivity with the provided user ID as an extra.
      *
      * @param context The context from which the Intent is being created.
      * @param userId  The user ID to be included as an extra in the Intent.

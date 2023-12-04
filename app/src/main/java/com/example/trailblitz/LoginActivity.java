@@ -13,54 +13,61 @@ import androidx.room.Room;
 
 import com.example.trailblitz.db.AppDatabase;
 import com.example.trailblitz.db.TrailBlitzDAO;
+/**
+ * @author Talia Frendl
+ * @since  November 30, 2023
+ * Assignment: Project 02: Part 02 Login and Landing Page
+ * Used ChatGPT to help write javadoc comments.
+ * LoginActivity represents the user interface for logging into the TrailBlitz application.
+ * It includes UI elements such as username and password fields, login, and new account buttons.
+ * This class interacts with the TrailBlitz database to authenticate users and navigate to the main activity upon successful login.
+ */
 
 public class LoginActivity extends AppCompatActivity {
+    // UI elements
     private EditText mUsernameField;
     private EditText mPasswordField;
     private Button mLoginButton;
     private Button mNewAccountButton;
 
 
+    // Database-related fields
     private TrailBlitzDAO mTrailBlitZDAO;
     private String mUsername;
     private String mPassword;
-
     private User mUser;
 
-
+    /**
+     * Initializes the activity and sets up the UI elements.
+     * It also initializes the database access object (DAO) for TrailBlitz entities.
+     *
+     * @param savedInstanceState The saved state of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         wireupDisplay();
-
         getDatabase();
-
-    }
-
-    private void getDatabase() {
-        mTrailBlitZDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
-                .allowMainThreadQueries()   // generally do not want to do on main thread
-                .build()                    // constructs
-                .getTrailBlitzDAO();        // returns our instance - makes sure only one instance at a time
     }
 
     /**
-     * Wire up the display elements for the login screen by associating them with
-     * their respective views and setting up event listeners for login and new account buttons.
-     * This method initializes the following UI elements:
-     * - Username Field (EditText)
-     * - Password Field (EditText)
-     * - Login Button
-     * - New Account Button
-     * Additionally, it sets up click listeners for the Login and New Account Buttons
-     * to handle user interactions. The click listeners are currently placeholders,
-     * and it is recommended to finish their implementations for login and new account functionality.
-     * <p>
-     * Note: Make sure the corresponding layout XML file contains the necessary views
-     * with the specified IDs (R.id.editTextLoginUsername, R.id.editTextLoginPassword, etc.)
-     * for this method to successfully wire up the display elements.
+     * Initializes the TrailBlitzDAO by building the Room database instance.
+     * This method allows database operations on the main thread for simplicity.
+     */
+    private void getDatabase() {
+        mTrailBlitZDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries()   // generally do not want to do on main thread
+                .build()
+                .getTrailBlitzDAO();
+    }
+
+    /**
+     * Wire up the display elements for the login screen and set up click listeners for buttons.
+     * This method associates UI elements with their respective views and sets up event listeners for login and new account buttons.
+     * It also initializes click listeners for these buttons, currently serving as placeholders for future implementation.
+     * Make sure the corresponding layout XML file contains the necessary views
+     * with the specified IDs (R.id.editTextLoginUsername, R.id.editTextLoginPassword, etc.).
      */
     private void wireupDisplay() {
         // Wire up text field with their respective views
@@ -97,10 +104,20 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Validates the entered password against the stored user password.
+     *
+     * @return True if the password is valid, false otherwise.
+     */
     private boolean validatePassword() {
         return mUser.getPassword().equals(mPassword);
     }
 
+    /**
+     * Checks if the entered username exists in the database and retrieves the corresponding user.
+     *
+     * @return True if the user exists, false otherwise.
+     */
     private boolean checkForUserInDatabase() {
         mUser = mTrailBlitZDAO.getUserByUsername(mUsername);
         if(mUser == null) {
@@ -110,15 +127,16 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Retrieves the username and password values entered in the UI fields.
+     */
     private void getValuesFromDisplay() {
         mUsername = mUsernameField.getText().toString();
         mPassword = mPasswordField.getText().toString();
     }
 
     /**
-     * Create an Intent for launching the LoginActivity.
-     * This factory method simplifies the process of creating an Intent for starting the LoginActivity.
-     * The calling component can use this Intent to navigate to the LoginActivity.
+     * Factory method for creating an Intent to launch the LoginActivity.
      *
      * @param context The context from which the Intent is being created.
      * @return An Intent configured to launch the LoginActivity.
