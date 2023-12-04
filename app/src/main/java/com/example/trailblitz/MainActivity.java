@@ -64,17 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Logs in the user based on the provided user ID and retrieves the user's information.
-     *
-     * @param userId The user ID used to log in the user.
-     */
-    private void loginUser(int userId) {
-        mUser = mTrailBlitzDAO.getUserByUserId(userId);
-        addUserToPreference(userId);
-        invalidateOptionsMenu();
-    }
-
-    /**
      * Initializes the TrailBlitzDAO by building the Room database instance.
      * This method allows database operations on the main thread for simplicity.
      */
@@ -119,12 +108,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Initializes shared preferences.
+     * Logs in the user based on the provided user ID and retrieves the user's information.
+     *
+     * @param userId The user ID used to log in the user.
      */
-    private void getPrefs() {
-        mPreferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
+    private void loginUser(int userId) {
+        mUser = mTrailBlitzDAO.getUserByUserId(userId);
+        addUserToPreference(userId);
+        invalidateOptionsMenu();
     }
-
 
     /**
      * Wire up the display elements by associating them with their respective views
@@ -200,30 +192,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Logs out the user by displaying a confirmation dialog and handling the user's response.
-     * Clears the user information from intent, preferences, and performs necessary actions.
+     * Initializes shared preferences.
      */
-    private void logoutUser() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-
-        alertBuilder.setMessage(R.string.logout);
-
-        alertBuilder.setPositiveButton(getString(R.string.yes),
-                (dialog, which) -> {
-                    clearUserFromIntent();
-                    clearUserFromPref();
-                    mUserId = -1;
-                    checkForUser();
-                    // TODO: Finish the implementation for logging the user out
-                    // TODO: the next two lines should probably get moved there
-                    Intent intent = LoginActivity.intentFactory(this);
-                    startActivity(intent);
-                });
-        alertBuilder.setNegativeButton(getString(R.string.no),
-                (dialog, which) -> {
-                    // we don't really need to do anything here
-                });
-        alertBuilder.create().show();
+    private void getPrefs() {
+        mPreferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
     /**
@@ -252,6 +224,33 @@ public class MainActivity extends AppCompatActivity {
      */
     private void clearUserFromIntent() {
         getIntent().putExtra(USER_ID_KEY, -1);
+    }
+
+    /**
+     * Logs out the user by displaying a confirmation dialog and handling the user's response.
+     * Clears the user information from intent, preferences, and performs necessary actions.
+     */
+    private void logoutUser() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+
+        alertBuilder.setMessage(R.string.logout);
+
+        alertBuilder.setPositiveButton(getString(R.string.yes),
+                (dialog, which) -> {
+                    clearUserFromIntent();
+                    clearUserFromPref();
+                    mUserId = -1;
+                    checkForUser();
+                    // TODO: Finish the implementation for logging the user out
+                    // TODO: the next two lines should probably get moved there
+                    Intent intent = LoginActivity.intentFactory(this);
+                    startActivity(intent);
+                });
+        alertBuilder.setNegativeButton(getString(R.string.no),
+                (dialog, which) -> {
+                    // we don't really need to do anything here
+                });
+        alertBuilder.create().show();
     }
 
     /**
