@@ -4,11 +4,12 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 import com.example.trailblitz.TrailBlitz;
+import com.example.trailblitz.User;
 
-@Database(entities = {TrailBlitz.class}, version = 1)
+@Database(entities = {TrailBlitz.class, User.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
-    public static final String DB_NAME = "com.example.trailblitz.TRAILBLITZ_DATABASE";
-    public static final String TRAILBLITZ_TABLE = "com.example.trailblitz.TRAILBLITZ_TABLE";
+    public static final String DB_NAME = "TRAILBLITZ_DATABASE";
+    public static final String TRAILBLITZ_TABLE = "TRAILBLITZ_TABLE";
 
     public static final String USER_TABLE = "USER_TABLE";
 

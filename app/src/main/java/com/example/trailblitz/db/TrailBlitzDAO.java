@@ -13,10 +13,10 @@ package com.example.trailblitz.db;
 public interface TrailBlitzDAO {
 
     @Insert
-    void insert(TrailBlitz... trailBlitzs);
+    void insert(TrailBlitz... trailBlitz);
 
     @Update
-    void update(TrailBlitz... trailBlitzs);
+    void update(TrailBlitz... trailBlitz);
 
     @Delete
     void delete(TrailBlitz trailBlitz);
