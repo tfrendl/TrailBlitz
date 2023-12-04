@@ -5,19 +5,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.trailblitz.db.TrailBlitzDAO;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String USER_ID_KEY = "com.example.trailblitz.userIdKey";
+    private static final String PREFERENCES_KEY = "com.example.trailblitz.PREFERENCES_KEY";
     private Button mInventoryButton;
     private Button mCartButton;
     private Button mOrderHistoryButton;
     private Button mAdminControlsButton;
     private Button mUpdatePasswordButton;
     private Button mSignOutButton;
+
+    private TrailBlitzDAO mTrailBlitzDAO;
+    private int mUserId = -1;   // default value when there is no user yet defined
+    private SharedPreferences mPreferences = null;
+
+
+
 
     /**
      * Called when the activity is first created. This method is responsible for
@@ -43,6 +56,40 @@ public class MainActivity extends AppCompatActivity {
         updateUsernameDisplay();
         wireupDisplay();
 
+    }
+
+    private void checkForUser() {
+        mUserId = getIntent().getIntExtra(USER_ID_KEY, -1); // if theres an extra, it becomes USER_ID_KEY
+        // if there isn't an extra, it's -1
+        // do we have a user in the intent?
+        if(mUserId != -1) {
+            return;
+        }
+
+        if(mPreferences == null) {
+            getPrefs();
+        }
+        mUserId = mPreferences.getInt(USER_ID_KEY, -1);
+
+        // do we have a user in the preferences?
+        if(mUserId != -1) {
+            return;
+        }
+
+        List<User> users = mTrailBlitzDAO.getAllUsers();
+        // if there are no users, make a default user
+        if (users.size() <= 0) {
+            User defaultUser = new User("testuser1","testuser1", "no");
+            User altUser = new User("admin2","admin2", "yes");
+            mTrailBlitzDAO.insert(defaultUser, altUser);
+        }
+
+        Intent intent = LoginActivity.intentFactory(this);
+        startActivity(intent);
+    }
+
+    private void getPrefs() {
+        mPreferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
     /**

@@ -12,6 +12,14 @@ public class User {
     private int mUserId;
 
     private String mUserName;
+    private String mPassword;
+    private String mIsAdmin;
+
+    public User(String mUserName, String mPassword, String mIsAdmin) {
+        this.mUserName = mUserName;
+        this.mPassword = mPassword;
+        this.mIsAdmin = mIsAdmin;
+    }
 
     public int getUserId(){
         return mUserId;
@@ -37,11 +45,11 @@ public class User {
         this.mPassword = password;
     }
 
-    public User(String mUserName, String mPassword) {
-        this.mUserName = mUserName;
-        this.mPassword = mPassword;
+    public String getIsAdmin() {
+        return mIsAdmin;
     }
 
-    private String mPassword;
-
+    public void setIsAdmin(String isAdmin) {
+        this.mIsAdmin = isAdmin;
+    }
 }

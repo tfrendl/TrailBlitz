@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
+import com.example.trailblitz.db.AppDatabase;
+import com.example.trailblitz.db.TrailBlitzDAO;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText mUsernameField;
@@ -15,14 +20,13 @@ public class LoginActivity extends AppCompatActivity {
     private Button mLoginButton;
     private Button mNewAccountButton;
 
-    // TODO: make DAO
 
+    private TrailBlitzDAO mTrailBlitZDAO;
     private String mUsername;
     private String mPassword;
 
+    private User mUser;
 
-
-    // TODO: make User class
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -31,6 +35,15 @@ public class LoginActivity extends AppCompatActivity {
 
         wireupDisplay();
 
+        getDatabase();
+
+    }
+
+    private void getDatabase() {
+        mTrailBlitZDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries()   // generally do not want to do on main thread
+                .build()                    // constructs
+                .getTrailBlitzDAO();        // returns our instance - makes sure only one instance at a time
     }
 
     /**
@@ -62,8 +75,15 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for login functionality
-                // Add the necessary logic to handle user login when the Login Button is clicked
+                getValuesFromDisplay();
+                if(checkForUserInDatabase()) {
+                    if (!validatePassword()) {
+                        Toast.makeText(LoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = MainActivity.intentFactory(getApplicationContext(),mUser.getUserId());
+                        startActivity(intent);
+                    }
+                }
             }
         });
 
@@ -75,6 +95,24 @@ public class LoginActivity extends AppCompatActivity {
                 // Add the necessary logic to handle creating a new account when the New Account Button is clicked
             }
         });
+    }
+
+    private boolean validatePassword() {
+        return mUser.getPassword().equals(mPassword);
+    }
+
+    private boolean checkForUserInDatabase() {
+        mUser = mTrailBlitZDAO.getUserByUsername(mUsername);
+        if(mUser == null) {
+            Toast.makeText(this, "no user " + mUsername + " found", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void getValuesFromDisplay() {
+        mUsername = mUsernameField.getText().toString();
+        mPassword = mPasswordField.getText().toString();
     }
 
     /**

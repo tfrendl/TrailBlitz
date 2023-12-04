@@ -21,6 +21,9 @@ public interface TrailBlitzDAO {
     @Delete
     void delete(TrailBlitz trailBlitz);
 
+
+
+
     @Insert
     void insert(User...users);
 

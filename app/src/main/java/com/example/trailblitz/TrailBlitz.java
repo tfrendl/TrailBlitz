@@ -10,6 +10,7 @@ public class TrailBlitz {
     @PrimaryKey(autoGenerate = true)
     private int mLogId;
 
+
     public int getLogId() {
         return mLogId;
     }
