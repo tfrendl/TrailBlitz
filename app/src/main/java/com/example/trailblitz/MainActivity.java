@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
     private void loginUser(int userId) {
         mUser = mTrailBlitzDAO.getUserByUserId(userId);
         addUserToPreference(userId);
-        //invalidateOptionsMenu();
     }
 
     /**

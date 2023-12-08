@@ -3,6 +3,7 @@ package com.example.trailblitz.db;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.trailblitz.LoginActivity;
+import com.example.trailblitz.MainActivity;
 import com.example.trailblitz.R;
 import com.example.trailblitz.User;
 
@@ -20,6 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mPasswordField;
     private EditText mPasswordRepeatField;
     private Button mButton;
+    private Button mButtonBack;
 
     private String mUsername;
     private String mPassword;
@@ -40,6 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         mPasswordField = findViewById(R.id.editTextPassword);
         mPasswordRepeatField = findViewById(R.id.editTextPassword2);
         mButton = findViewById(R.id.buttonSignUp);
+        mButtonBack = findViewById(R.id.buttonBack);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +53,14 @@ public class SignUpActivity extends AppCompatActivity {
                 if (user != null) {
                     mTrailBlitzDAO.insert(user);
                 }
+            }
+        });
+
+        mButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 

@@ -24,4 +24,5 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="sign_up_button_text">Sign Up</string>
     <string name="password1_prompt">Password</string>
+    <string name="back">Back</string>
 </resources>
