@@ -3,6 +3,7 @@ package com.example.trailblitz;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import com.example.trailblitz.db.AppDatabase;
+import com.example.trailblitz.db.TrailBlitzDAO;
 
 /**
  * @author Talia Frendl
@@ -19,10 +20,16 @@ public class TrailBlitz {
      */
     @PrimaryKey(autoGenerate = true)
     private int mLogId;
+
     private String mItem;
     private double mPrice;
     private int mQuantity;
 
+    public TrailBlitz(String mItem, double mPrice, int mQuantity) {
+        this.mItem = mItem;
+        this.mPrice = mPrice;
+        this.mQuantity = mQuantity;
+    }
 
 
     public int getLogId() {
