@@ -20,6 +20,7 @@ public class TrailBlitz {
     @PrimaryKey(autoGenerate = true)
     private int mLogId;
     private String mItem;
+    private double mPrice;
     private int mQuantity;
 
 
@@ -38,6 +39,14 @@ public class TrailBlitz {
 
     public void setItem(String item) {
         this.mItem = item;
+    }
+
+    public double getPrice() {
+        return mPrice;
+    }
+
+    public void setPrice(double price) {
+        this.mPrice = price;
     }
 
     public int getQuantity() {
