@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.trailblitz.db.AppDatabase;
+import com.example.trailblitz.db.SignUpActivity;
 import com.example.trailblitz.db.TrailBlitzDAO;
 /**
  * @author Talia Frendl
@@ -98,8 +99,9 @@ public class LoginActivity extends AppCompatActivity {
         mNewAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for creating a new account
-                // Add the necessary logic to handle creating a new account when the New Account Button is clicked
+                // specify the class of the activity I want to start
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
     }

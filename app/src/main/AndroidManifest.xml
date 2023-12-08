@@ -12,9 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrailBlitz"
         tools:targetApi="31">
-        <!-- Discovered through chatGPT that I needed to manually add .LoginActivity here  -->
         <activity
-            android:name=".LoginActivity" />
+            android:name=".db.SignUpActivity"
+            android:exported="false" />
+        <!-- Discovered through chatGPT that I needed to manually add .LoginActivity here -->
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
