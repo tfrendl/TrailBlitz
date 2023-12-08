@@ -9,8 +9,7 @@ import com.example.trailblitz.db.AppDatabase;
  * @since  December 4, 2023
  * Assignment: Project 02: Part 02 Login and Landing Page
  * Used ChatGPT to help write javadoc comments.
- * Entity class representing a TrailBlitz in the TrailBlitz application.
- * Each TrailBlitz instance is associated with a unique log ID, which is automatically generated.
+ * Entity class representing a item in the TrailBlitz application.
  */
 
 @Entity(tableName = AppDatabase.TRAILBLITZ_TABLE)
@@ -20,6 +19,9 @@ public class TrailBlitz {
      */
     @PrimaryKey(autoGenerate = true)
     private int mLogId;
+    private String mItem;
+    private int mQuantity;
+
 
     /**
      * Gets the log ID of the TrailBlitz.

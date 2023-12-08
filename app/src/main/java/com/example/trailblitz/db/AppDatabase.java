@@ -26,6 +26,8 @@ public abstract class AppDatabase extends RoomDatabase {
     // The name of the table for User entities in the database
     public static final String USER_TABLE = "USER_TABLE";
 
+    public static final String PURCHASE_TABLE = " PURCHASE_TABLE";
+
     /**
      * Retrieves the Data Access Object (DAO) for TrailBlitz entities.
      *
