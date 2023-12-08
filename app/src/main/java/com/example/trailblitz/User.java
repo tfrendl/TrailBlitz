@@ -110,4 +110,15 @@ public class User {
     public void setIsAdmin(boolean isAdmin) {
         this.mIsAdmin = isAdmin;
     }
+
+    @Override
+    public String toString(){
+        String output;
+
+        output = mUserName + " " + mPassword + " " + mIsAdmin;
+        output += "\n";
+        output += "userId == " + mUserId;
+
+        return output;
+    }
 }

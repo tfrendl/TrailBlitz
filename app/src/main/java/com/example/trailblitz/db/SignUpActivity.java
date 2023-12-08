@@ -1,6 +1,7 @@
 package com.example.trailblitz.db;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -23,12 +24,14 @@ public class SignUpActivity extends AppCompatActivity {
     private String mUsername;
     private String mPassword;
     private User mUser;
+    private TrailBlitzDAO mTrailBlitzDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         wireUpDisplay();
+        getDatabase();
     }
 
     private void wireUpDisplay() {
@@ -42,9 +45,23 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 User user = getValuesFromDisplay();
+                if (user != null) {
+                    mTrailBlitzDAO.insert(user);
+                }
             }
         });
 
+    }
+
+    /**
+     * Initializes the TrailBlitzDAO by building the Room database instance.
+     * This method allows database operations on the main thread for simplicity.
+     */
+    private void getDatabase() {
+        mTrailBlitzDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries()   // generally do not want to do on main thread
+                .build()
+                .getTrailBlitzDAO();
     }
 
     private User getValuesFromDisplay() {
@@ -57,6 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (!password.equals(passwordRepeat)) {
             Toast.makeText(SignUpActivity.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+            // https://www.quora.com/How-can-I-clear-text-in-EditText-when-entered-in-Android-Studio
             mPasswordField.getText().clear();
             mPasswordRepeatField.getText().clear();
             return null;

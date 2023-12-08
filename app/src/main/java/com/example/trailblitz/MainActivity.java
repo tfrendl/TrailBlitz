@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     private void loginUser(int userId) {
         mUser = mTrailBlitzDAO.getUserByUserId(userId);
         addUserToPreference(userId);
-        invalidateOptionsMenu();
+        //invalidateOptionsMenu();
     }
 
     /**
@@ -241,8 +241,7 @@ public class MainActivity extends AppCompatActivity {
                     clearUserFromPref();
                     mUserId = -1;
                     checkForUser();
-                    // TODO: Finish the implementation for logging the user out
-                    // TODO: the next two lines should probably get moved there
+                    // go back to Login activity
                     Intent intent = LoginActivity.intentFactory(this);
                     startActivity(intent);
                 });
