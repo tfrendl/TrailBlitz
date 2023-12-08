@@ -23,21 +23,28 @@ public class TrailBlitz {
     private int mQuantity;
 
 
-    /**
-     * Gets the log ID of the TrailBlitz.
-     *
-     * @return The log ID of the TrailBlitz.
-     */
+
     public int getLogId() {
         return mLogId;
     }
 
-    /**
-     * Sets the log ID of the TrailBlitz.
-     *
-     * @param logId The log ID to be set for the TrailBlitz.
-     */
     public void setLogId(int logId) {
-        mLogId = logId;
+        this.mLogId = logId;
+    }
+
+    public String getItem() {
+        return mItem;
+    }
+
+    public void setItem(String item) {
+        this.mItem = item;
+    }
+
+    public int getQuantity() {
+        return mQuantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.mQuantity = quantity;
     }
 }
