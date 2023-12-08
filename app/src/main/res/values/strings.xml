@@ -18,4 +18,10 @@
     <string name="logout">Would you like to sign out?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="sign_up_header">Sign Up</string>
+    <string name="username_prompt">Username</string>
+    <string name="password2_prompt">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="sign_up_button_text">Sign Up</string>
+    <string name="password1_prompt">Password</string>
 </resources>
