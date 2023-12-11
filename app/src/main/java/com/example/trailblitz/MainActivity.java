@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mSignOutButton;
     private TextView mUserNameTextView;
 
+
     // Database and user-related fields
     private TrailBlitzDAO mTrailBlitzDAO;
     private int mUserId = -1;   // default value when there is no user yet defined

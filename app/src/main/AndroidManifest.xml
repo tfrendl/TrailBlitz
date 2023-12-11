@@ -16,7 +16,7 @@
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".db.SignUpActivity"
+            android:name=".SignUpActivity"
             android:exported="false" /> <!-- Discovered through chatGPT that I needed to manually add .LoginActivity here -->
         <activity android:name=".LoginActivity" />
         <activity

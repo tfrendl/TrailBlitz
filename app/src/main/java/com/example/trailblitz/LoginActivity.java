@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.trailblitz.db.AppDatabase;
-import com.example.trailblitz.db.SignUpActivity;
 import com.example.trailblitz.db.TrailBlitzDAO;
 /**
  * @author Talia Frendl
@@ -101,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // specify the class of the activity I want to start
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                intent.putExtra("fromAdmin", false);
                 startActivity(intent); // launch that activity
             }
         });

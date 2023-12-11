@@ -1,21 +1,18 @@
-package com.example.trailblitz.db;
+package com.example.trailblitz;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.trailblitz.LoginActivity;
-import com.example.trailblitz.MainActivity;
-import com.example.trailblitz.R;
-import com.example.trailblitz.User;
+import com.example.trailblitz.db.AppDatabase;
+import com.example.trailblitz.db.TrailBlitzDAO;
 
 public class SignUpActivity extends AppCompatActivity {
     private TextView mSignUpDisplay;
@@ -57,10 +54,23 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         mButtonBack.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This checks to see if the intent said that it was or wasn't an admin
+             * If admin is accessing, back button goes back to admin controls
+             * If admin is not accessing, back button goes to login page
+             * @param v The view that was clicked.
+             */
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent); // launch that activity
+                Intent receivedIntent = getIntent();
+                boolean isFromAdmin = receivedIntent.getBooleanExtra("fromAdmin", false);
+                if (isFromAdmin) {
+                    Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    startActivity(intent); // launch that activity
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent); // launch that activity
+                }
             }
         });
 

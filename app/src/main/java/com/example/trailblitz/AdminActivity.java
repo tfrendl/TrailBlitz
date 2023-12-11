@@ -33,7 +33,9 @@ public class AdminActivity extends AppCompatActivity {
         mButtonAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: implement
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                intent.putExtra("fromAdmin", true);
+                startActivity(intent); // launch that activity
             }
         });
 
