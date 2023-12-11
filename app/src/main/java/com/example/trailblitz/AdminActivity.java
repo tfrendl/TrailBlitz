@@ -34,6 +34,8 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                // How to use booleans in intents:
+                // https://programzools.com/android/pass-data-from-one-activity-to-other-android.html
                 intent.putExtra("fromAdmin", true);
                 startActivity(intent); // launch that activity
             }

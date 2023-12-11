@@ -65,6 +65,8 @@ public class SignUpActivity extends AppCompatActivity {
                 Intent receivedIntent = getIntent();
                 boolean isFromAdmin = receivedIntent.getBooleanExtra("fromAdmin", false);
                 if (isFromAdmin) {
+                    // How to use booleans in intents:
+                    // https://programzools.com/android/pass-data-from-one-activity-to-other-android.html
                     Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
                     startActivity(intent); // launch that activity
                 } else {
