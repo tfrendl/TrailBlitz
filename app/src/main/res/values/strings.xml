@@ -30,4 +30,8 @@
     <string name="admin_controls_title">Admin Controls</string>
     <string name="item_controls">Item Controls</string>
     <string name="back_from_admin">Back</string>
+    <string name="backFromDelete">Back</string>
+    <string name="delete_user_button">Delete User</string>
+    <string name="users">Users</string>
+    <string name="usernameFromDelete">Username</string>
 </resources>
