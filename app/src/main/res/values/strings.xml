@@ -25,4 +25,9 @@
     <string name="sign_up_button_text">Sign Up</string>
     <string name="password1_prompt">Password</string>
     <string name="back">Back</string>
+    <string name="delete_user">Delete User</string>
+    <string name="add_user">Add User</string>
+    <string name="admin_controls_title">Admin Controls</string>
+    <string name="item_controls">Item Controls</string>
+    <string name="back_from_admin">Back</string>
 </resources>

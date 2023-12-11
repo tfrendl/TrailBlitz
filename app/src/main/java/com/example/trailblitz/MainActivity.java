@@ -169,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
         mAdminControlsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the admin controls
+                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 
