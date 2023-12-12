@@ -32,6 +32,8 @@ public interface TrailBlitzDAO {
     @Delete
     void delete(TrailBlitz trailBlitz);
 
+    @Query("SELECT * FROM " + AppDatabase.TRAILBLITZ_TABLE)
+    List<TrailBlitz> getAllItems();
 
     /**
      * User Table

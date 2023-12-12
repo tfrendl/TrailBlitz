@@ -146,7 +146,8 @@ public class MainActivity extends AppCompatActivity {
         mInventoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the inventory
+                Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 
