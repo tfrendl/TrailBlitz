@@ -40,4 +40,9 @@
     <string name="back1">Back</string>
     <string name="inventory1">Inventory</string>
     <string name="item">Item</string>
+    <string name="item_controls1">Item Controls</string>
+    <string name="add_item">Add Item</string>
+    <string name="update_price">Update Price</string>
+    <string name="update_quantity">Update Quantity</string>
+    <string name="back2">Back</string>
 </resources>

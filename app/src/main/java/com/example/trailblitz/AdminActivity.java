@@ -52,7 +52,8 @@ public class AdminActivity extends AppCompatActivity {
         mButtonItemControls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: implement
+                Intent intent = new Intent(getApplicationContext(), ItemControlsActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 
