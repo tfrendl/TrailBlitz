@@ -52,6 +52,9 @@ public interface TrailBlitzDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserName = :username")
     User getUserByUsername(String username);
 
+    @Query ("SELECT mUserName FROM " + AppDatabase.USER_TABLE)
+    List<String> loadUsernames();
+
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :userId")
     User getUserByUserId(int userId);
 

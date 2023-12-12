@@ -1,5 +1,6 @@
 package com.example.trailblitz;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import com.example.trailblitz.db.AppDatabase;
@@ -22,8 +23,13 @@ public class User {
     @PrimaryKey(autoGenerate = true)    // uniquely identifies data in database
     private int mUserId;
 
+    @ColumnInfo(name = "mUserName")
     private String mUserName;
+
+    @ColumnInfo(name = "mPassword")
     private String mPassword;
+
+    @ColumnInfo(name = "mIsAdmin")
     private boolean mIsAdmin;
 
     /**
