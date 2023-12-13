@@ -1,6 +1,7 @@
 package com.example.trailblitz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
@@ -18,6 +19,7 @@ import com.example.trailblitz.db.TrailBlitzDAO;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class InventoryActivity extends AppCompatActivity {
     private Button mButtonBack;
     private TrailBlitzDAO mTrailBlitzDAO;
     private List<TrailBlitz> mItems;
+    ArrayList<StoreModel> storeModel = new ArrayList<>();
 
 
     @Override
@@ -37,6 +40,11 @@ public class InventoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inventory);
         getDatabase();
         wireUpDisplay();
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewInventory);
+        setUpStoreModels();
+        Store_RecyclerViewAdapter adapter = new Store_RecyclerViewAdapter(this, storeModel);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void getDatabase() {
@@ -48,9 +56,9 @@ public class InventoryActivity extends AppCompatActivity {
 
     private void wireUpDisplay() {
         mInventoryText = findViewById(R.id.textViewInventory);
-        mRecyclerViewItems = findViewById(R.id.recyclerViewInventory);
-        mInventoryText.setMovementMethod(new ScrollingMovementMethod());
-        refreshDisplay();
+      //  mRecyclerViewItems = findViewById(R.id.recyclerViewInventory);
+      //  mInventoryText.setMovementMethod(new ScrollingMovementMethod());
+       // refreshDisplay();
 
         mItemPrompt = findViewById(R.id.editTextItemName);
         mQuantityPrompt = findViewById(R.id.editTextQuantity);
@@ -86,6 +94,19 @@ public class InventoryActivity extends AppCompatActivity {
             sb.append("\n");
         }
         mInventoryText.setText(sb.toString());
+    }
+
+    private void setUpStoreModels() {
+        String[] itemNames = mTrailBlitzDAO.loadItemsNames();
+        double[] itemPrices = mTrailBlitzDAO.loadItemPrices();
+        int[] itemQuantities = mTrailBlitzDAO.loadItemQuantity();
+
+        for (int i = 0; i < itemNames.length; i++) {
+            storeModel.add(new StoreModel(itemNames[i],
+                    itemPrices[i],
+                    itemQuantities[i]));
+        }
+
     }
 
 }

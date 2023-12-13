@@ -35,6 +35,17 @@ public interface TrailBlitzDAO {
     @Query("SELECT * FROM " + AppDatabase.TRAILBLITZ_TABLE)
     List<TrailBlitz> getAllItems();
 
+    @Query("SELECT mItem FROM " + AppDatabase.TRAILBLITZ_TABLE)
+    String[] loadItemsNames();
+
+    @Query("SELECT mPrice FROM " + AppDatabase.TRAILBLITZ_TABLE)
+    double[] loadItemPrices();
+
+    @Query("SELECT mQuantity FROM " + AppDatabase.TRAILBLITZ_TABLE)
+    int[] loadItemQuantity();
+
+
+
     @Query("SELECT * FROM " + AppDatabase.TRAILBLITZ_TABLE + " WHERE mItem = :item")
     TrailBlitz getTrailBlitzByItem(String item);
 

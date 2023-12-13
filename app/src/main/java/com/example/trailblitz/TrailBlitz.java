@@ -1,5 +1,6 @@
 package com.example.trailblitz;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import com.example.trailblitz.db.AppDatabase;
@@ -21,8 +22,11 @@ public class TrailBlitz {
     @PrimaryKey(autoGenerate = true)
     private int mLogId;
 
+    @ColumnInfo(name = "mItem")
     private String mItem;
+    @ColumnInfo(name = "mPrice")
     private double mPrice;
+    @ColumnInfo(name = "mQuantity")
     private int mQuantity;
 
     public TrailBlitz(String mItem, double mPrice, int mQuantity) {
