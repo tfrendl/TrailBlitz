@@ -11,6 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * @author Talia Frendl
+ * @since December 13, 2023
+ *
+ * Recycler View:
+ * https://www.youtube.com/watch?v=Mc0XT58A1Z4
+ */
+
 public class Store_RecyclerViewAdapter extends RecyclerView.Adapter<Store_RecyclerViewAdapter.MyViewHolder> {
 
     Context context;

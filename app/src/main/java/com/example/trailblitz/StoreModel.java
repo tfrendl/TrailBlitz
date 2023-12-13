@@ -1,5 +1,12 @@
 package com.example.trailblitz;
 
+/**
+ * @author Talia Frendl
+ * @since December 13, 2023
+ *
+ * Recycler View:
+ * https://www.youtube.com/watch?v=Mc0XT58A1Z4
+ */
 public class StoreModel {
     String item;
     double price;
