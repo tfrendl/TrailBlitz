@@ -51,4 +51,6 @@
     <string name="quantity1">Quantity</string>
     <string name="add_to_inventory">Add to Inventory</string>
     <string name="back3">Back</string>
+    <string name="update_item">Update Item</string>
+    <string name="textPrice">Price</string>
 </resources>

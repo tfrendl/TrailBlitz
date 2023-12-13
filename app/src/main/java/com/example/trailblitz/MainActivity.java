@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                intent.putExtra("editMode", false);
                 startActivity(intent); // launch that activity
             }
         });

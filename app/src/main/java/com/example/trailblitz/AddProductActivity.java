@@ -22,6 +22,7 @@ public class AddProductActivity extends AppCompatActivity {
     private EditText mQuantityPrompt;
     private Button mButtonAdd;
     private Button mButtonBack;
+
     private TrailBlitzDAO mTrailBlitzDAO;
     private TrailBlitz mTrailBlitz; // contains item
 

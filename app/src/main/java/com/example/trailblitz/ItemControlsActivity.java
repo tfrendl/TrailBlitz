@@ -43,6 +43,7 @@ public class ItemControlsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                intent.putExtra("editMode", true);
                 startActivity(intent);
             }
         });

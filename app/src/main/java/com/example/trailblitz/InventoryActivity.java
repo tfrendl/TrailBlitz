@@ -32,12 +32,19 @@ public class InventoryActivity extends AppCompatActivity {
     private TrailBlitzDAO mTrailBlitzDAO;
     private List<TrailBlitz> mItems;
     ArrayList<StoreModel> storeModel = new ArrayList<>();
+    private Button mButtonUpdate;
+    private EditText mPriceEntry;
+    boolean editMode = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
+        // check to see if in edit mode
+        Intent receivedIntent = getIntent();
+        editMode = receivedIntent.getBooleanExtra("editMode", false);
+
         getDatabase();
         wireUpDisplay();
         RecyclerView recyclerView = findViewById(R.id.recyclerViewInventory);
@@ -56,13 +63,22 @@ public class InventoryActivity extends AppCompatActivity {
 
     private void wireUpDisplay() {
         mInventoryText = findViewById(R.id.textViewInventory);
-      //  mRecyclerViewItems = findViewById(R.id.recyclerViewInventory);
-      //  mInventoryText.setMovementMethod(new ScrollingMovementMethod());
-       // refreshDisplay();
+        mPriceEntry = findViewById(R.id.editTextChangePrice);
+        mButtonUpdate = findViewById(R.id.buttonUpdate);
+        mButtonAddToCart = findViewById(R.id.buttonAddToCart);
+
+        if(editMode) {
+            mPriceEntry.setVisibility(View.VISIBLE);
+            mButtonUpdate.setVisibility(View.VISIBLE);
+            mButtonAddToCart.setVisibility(View.INVISIBLE);
+        } else {
+            mPriceEntry.setVisibility(View.INVISIBLE);
+            mButtonUpdate.setVisibility(View.INVISIBLE);
+            mButtonAddToCart.setVisibility(View.VISIBLE);
+        }
 
         mItemPrompt = findViewById(R.id.editTextItemName);
         mQuantityPrompt = findViewById(R.id.editTextQuantity);
-        mButtonAddToCart = findViewById(R.id.buttonAddToCart);
         mButtonBack = findViewById(R.id.buttonBackInventory);
 
         mButtonAddToCart.setOnClickListener(new View.OnClickListener() {
