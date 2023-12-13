@@ -158,12 +158,15 @@ public class InventoryActivity extends AppCompatActivity {
                     price = mTrailBlitzDAO.getPriceByItem(itemName);
                     Toast.makeText(this, "updating quantity", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "updating price and quantity", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "updating price and quantity", Toast.LENGTH_SHORT).show();
                 }
+
                     TrailBlitz updatedTrailBlitz = new TrailBlitz(itemName, price, quantity);
                     updatedTrailBlitz.setLogId(logId);
                     return updatedTrailBlitz;
             }
+        } else {
+            Toast.makeText(this, "enter a price or quantity", Toast.LENGTH_SHORT).show();
         }
         return null;
     }
