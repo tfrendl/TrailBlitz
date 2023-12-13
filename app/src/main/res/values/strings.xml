@@ -45,4 +45,10 @@
     <string name="update_price">Update Price</string>
     <string name="update_quantity">Update Quantity</string>
     <string name="back2">Back</string>
+    <string name="add_product">Add Product</string>
+    <string name="item_name">Item Name</string>
+    <string name="price">Price</string>
+    <string name="quantity1">Quantity</string>
+    <string name="add_to_inventory">Add to Inventory</string>
+    <string name="back3">Back</string>
 </resources>

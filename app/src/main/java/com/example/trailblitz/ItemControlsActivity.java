@@ -34,7 +34,8 @@ public class ItemControlsActivity extends AppCompatActivity {
         mButtonAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: implement
+                Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
+                startActivity(intent);
             }
         });
 
