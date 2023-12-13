@@ -14,7 +14,6 @@ public class ItemControlsActivity extends AppCompatActivity {
     private TextView mTextItemControls;
     private Button mButtonAddItem;
     private Button mButtonUpdatePrice;
-    private Button mUpdateQuantity;
     private Button mButtonBack;
 
     @Override
@@ -28,7 +27,6 @@ public class ItemControlsActivity extends AppCompatActivity {
         mTextItemControls = findViewById(R.id.textViewItemControls);
         mButtonAddItem = findViewById(R.id.buttonAdminAddItem);
         mButtonUpdatePrice = findViewById(R.id.buttonAdminUpdatePrice);
-        mUpdateQuantity = findViewById(R.id.buttonAdminUpdateQuantity);
         mButtonBack = findViewById(R.id.buttonAdminItemBack);
 
         mButtonAddItem.setOnClickListener(new View.OnClickListener() {
@@ -48,13 +46,6 @@ public class ItemControlsActivity extends AppCompatActivity {
             }
         });
 
-        mUpdateQuantity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
-                startActivity(intent);
-            }
-        });
 
         mButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override

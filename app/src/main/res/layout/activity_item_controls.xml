@@ -35,22 +35,12 @@
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_marginTop="24dp"
-        android:text="@string/update_price"
+        android:text="@string/update_item1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAdminAddItem" />
 
-    <Button
-        android:id="@+id/buttonAdminUpdateQuantity"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/update_quantity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdminUpdatePrice" />
 
     <Button
         android:id="@+id/buttonAdminItemBack"
@@ -63,6 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdminUpdateQuantity"
+
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdminUpdatePrice"
         app:layout_constraintVertical_bias="0.823" />
 </androidx.constraintlayout.widget.ConstraintLayout>
