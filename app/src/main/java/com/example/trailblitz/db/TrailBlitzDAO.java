@@ -35,6 +35,9 @@ public interface TrailBlitzDAO {
     @Query("SELECT * FROM " + AppDatabase.TRAILBLITZ_TABLE)
     List<TrailBlitz> getAllItems();
 
+    @Query("SELECT * FROM " + AppDatabase.TRAILBLITZ_TABLE + " WHERE mItem = :item")
+    TrailBlitz getTrailBlitzByItem(String item);
+
     /**
      * User Table
      */
