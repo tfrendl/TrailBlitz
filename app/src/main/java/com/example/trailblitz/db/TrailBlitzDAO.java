@@ -44,10 +44,16 @@ public interface TrailBlitzDAO {
     @Query("SELECT mQuantity FROM " + AppDatabase.TRAILBLITZ_TABLE)
     int[] loadItemQuantity();
 
-
-
     @Query("SELECT * FROM " + AppDatabase.TRAILBLITZ_TABLE + " WHERE mItem = :item")
     TrailBlitz getTrailBlitzByItem(String item);
+    @Query("SELECT mPrice FROM " + AppDatabase.TRAILBLITZ_TABLE + " WHERE mItem = :item")
+    Double getPriceByItem(String item);
+
+    @Query("SELECT mLogId FROM " + AppDatabase.TRAILBLITZ_TABLE + " WHERE mItem = :item")
+    int getLogIdByItem(String item);
+
+    @Query("SELECT mQuantity FROM " + AppDatabase.TRAILBLITZ_TABLE + " WHERE mItem = :item")
+    int getQuantityByItem(String item);
 
     /**
      * User Table

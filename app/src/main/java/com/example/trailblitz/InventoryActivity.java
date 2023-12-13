@@ -8,6 +8,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,7 @@ public class InventoryActivity extends AppCompatActivity {
     private Button mButtonUpdate;
     private EditText mPriceEntry;
     boolean editMode = false;
+    private TrailBlitz mTrailBlitz;
 
 
     @Override
@@ -95,22 +97,84 @@ public class InventoryActivity extends AppCompatActivity {
                 startActivity(intent); // launch that activity
             }
         });
+
+        mButtonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editMode) {
+                    TrailBlitz item = getInputValues();
+                    if (item != null) {
+                        mTrailBlitzDAO.update(item);
+
+                    }
+                }
+            }
+        });
     }
 
-    private void refreshDisplay() {
-        mItems = mTrailBlitzDAO.getAllItems();
-        if(mItems.size() <= 0) {
-            Toast.makeText(this, "There are no items", Toast.LENGTH_SHORT).show();
+    private TrailBlitz getInputValues() {
+        TrailBlitz trailBlitzItem;
+        String itemName = "no item found";
+        double price = 0;
+        int quantity = 0;
+        boolean updatePrice = false;
+        boolean updateQuantity = false;
+
+        itemName = mItemPrompt.getText().toString();
+        String priceString = mPriceEntry.getText().toString();
+
+        // check for if the price is being changed
+        if (!priceString.isEmpty()) {
+            try {
+                price = Double.parseDouble(priceString);
+            } catch (NumberFormatException e) {
+                Log.d("TRAILBLITZ", "couldn't convert price");
+            }
+            updatePrice = true;
         }
 
-        StringBuilder sb = new StringBuilder();
+        String quantityString = mQuantityPrompt.getText().toString();
 
-        for (TrailBlitz item : mItems) {
-            sb.append(item);
-            sb.append("\n");
+        // check if the quantity is being changed
+        if (!quantityString.isEmpty()) {
+            try {
+                quantity = Integer.parseInt(quantityString);
+            } catch (NumberFormatException e) {
+                Log.d("TRAILBLITZ", "couldn't convert quantity");
+            }
+            updateQuantity = true;
         }
-        mInventoryText.setText(sb.toString());
+
+        if (updatePrice || updateQuantity) {
+            if(checkIfInDatabase(itemName)) {
+                Toast.makeText(this, "found " + itemName + " in the store!", Toast.LENGTH_SHORT).show();
+                int logId = mTrailBlitzDAO.getLogIdByItem(itemName);
+                if (updatePrice && !updateQuantity) {
+                    // update price, get quantity
+                    quantity = mTrailBlitzDAO.getQuantityByItem(itemName);
+                    Toast.makeText(this, "updating price", Toast.LENGTH_SHORT).show();
+                } else if (updateQuantity && !updatePrice) {
+                    // update quantity, get price
+                    price = mTrailBlitzDAO.getPriceByItem(itemName);
+                    Toast.makeText(this, "updating quantity", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "updating price and quantity", Toast.LENGTH_SHORT).show();
+                }
+                    TrailBlitz updatedTrailBlitz = new TrailBlitz(itemName, price, quantity);
+                    updatedTrailBlitz.setLogId(logId);
+                    return updatedTrailBlitz;
+            }
+        }
+        return null;
     }
+    private boolean checkIfInDatabase(String itemName) {
+        mTrailBlitz = mTrailBlitzDAO.getTrailBlitzByItem(itemName);
+        if (mTrailBlitz != null) {
+            return true;
+        }
+        return false;
+    }
+
 
     private void setUpStoreModels() {
         String[] itemNames = mTrailBlitzDAO.loadItemsNames();
@@ -122,7 +186,5 @@ public class InventoryActivity extends AppCompatActivity {
                     itemPrices[i],
                     itemQuantities[i]));
         }
-
     }
-
 }
