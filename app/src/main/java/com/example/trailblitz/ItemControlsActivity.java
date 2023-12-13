@@ -42,14 +42,16 @@ public class ItemControlsActivity extends AppCompatActivity {
         mButtonUpdatePrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: implement
+                Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                startActivity(intent);
             }
         });
 
         mUpdateQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: implement
+                Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                startActivity(intent);
             }
         });
 
