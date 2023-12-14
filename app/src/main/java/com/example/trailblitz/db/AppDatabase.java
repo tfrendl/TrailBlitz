@@ -17,7 +17,7 @@ import com.example.trailblitz.User;
  *
  * @version 2 The version of the database schema.
  */
-@Database(entities = {TrailBlitz.class, User.class, Purchase.class}, version = 4)
+@Database(entities = {TrailBlitz.class, User.class, Purchase.class}, version = 5)
 public abstract class AppDatabase extends RoomDatabase {
     // The name of the database
     public static final String DB_NAME = "TRAILBLITZ_DATABASE";

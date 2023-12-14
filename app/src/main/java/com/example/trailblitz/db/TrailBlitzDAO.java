@@ -105,4 +105,8 @@ public interface TrailBlitzDAO {
     @Query ("SELECT * FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mItemName = :itemName")
     Purchase getItemInfoFromUserIdAndItemName(int userId, String itemName);
 
+    @Query ("SELECT mItemName FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mHasPurchased = :hasPurchased")
+    String[] getItemsInCart(int userId, Boolean hasPurchased);
+
+
 }
