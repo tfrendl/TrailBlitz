@@ -9,7 +9,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.trailblitz.db.AppDatabase;
 import com.example.trailblitz.db.TrailBlitzDAO;
@@ -29,7 +31,9 @@ public class CartActivity extends AppCompatActivity {
     private Button mButtonCheckout;
     private Button mButtonBack;
     private TrailBlitzDAO mTrailBlitzDAO;
+    private EditText mItemPrompt;
     private int mUserId;
+    private Purchase mPurchase;
 
 
 
@@ -80,11 +84,19 @@ public class CartActivity extends AppCompatActivity {
         mButtonDelete = findViewById(R.id.buttonRemoveItem);
         mButtonCheckout = findViewById(R.id.buttonCheckout);
         mButtonBack = findViewById(R.id.buttonBack5);
+        mItemPrompt = findViewById(R.id.editTextRemoveItem);
 
         mButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: implement
+                String itemName = getItem();
+                if(validItem(itemName)) {
+                    removeOne(itemName);
+                    refreshDisplay();
+                } else {
+                    String toast = "invalid request";
+                    makeToast(toast);
+                }
             }
         });
 
@@ -103,5 +115,34 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(intent); // launch that activity
             }
         });
+    }
+
+    private void makeToast(String toast) {
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeOne(String itemName) {
+        mPurchase = mTrailBlitzDAO.getPurchase(mUserId, itemName, false);
+        mPurchase.setQuantity(mPurchase.getQuantity() - 1);
+        mTrailBlitzDAO.update(mPurchase);
+        if (mTrailBlitzDAO.getQuantityByUserId(mUserId, itemName, false) <= 0){
+            mTrailBlitzDAO.delete(mPurchase);
+        }
+    }
+
+    private String getItem() {
+        String itemName = "no item found";
+        itemName = mItemPrompt.getText().toString();
+        return itemName;
+    }
+
+    private boolean validItem(String itemName) {
+        // check if item is in cart and enough
+        if (mTrailBlitzDAO.getQuantityByUserId(mUserId, itemName, false) > 0) {
+            return true;
+        }
+
+        Toast.makeText(this, itemName + " is not in cart", Toast.LENGTH_SHORT).show();
+        return false;
     }
 }
