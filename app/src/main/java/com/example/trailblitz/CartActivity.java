@@ -68,7 +68,26 @@ public class CartActivity extends AppCompatActivity {
             sb.append(items[i] + "      " + quantity[i] + "\n");
         }
         mShowUserCart.setText(sb.toString());
+
+        double totalCost = getUsersTotalBalance();
+        mShowUserTotal.setText("$" + Double.toString(totalCost));
     }
+
+    private double getUsersTotalBalance() {
+        String[] itemsInCart = mTrailBlitzDAO.getItemsInCart(mUserId, false);
+        int[] howManyOfEach = new int[itemsInCart.length];
+        double[] itemPrice = new double[itemsInCart.length];
+        double total = 0.0;
+
+        for (int i = 0; i < itemsInCart.length; i++) {
+            howManyOfEach[i] = mTrailBlitzDAO.getQuantityByUserId(mUserId, itemsInCart[0], false);
+            itemPrice[i] = mTrailBlitzDAO.getPriceByItem(itemsInCart[0]);
+            total += (howManyOfEach[i] * itemPrice[i]);
+        }
+        total = (double) Math.round(total * 100.0) / 100.0; // https://stackoverflow.com/questions/11701399/round-up-to-2-decimal-places-in-java
+        return total;
+    }
+
     private void setUserId() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         mUserId = sharedPreferences.getInt(USER_ID_KEY, -1);
