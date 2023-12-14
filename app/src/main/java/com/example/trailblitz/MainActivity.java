@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
         mCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the cart
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 

@@ -64,4 +64,9 @@
     <string name="quantity2">Quantity</string>
     <string name="item2">Item</string>
     <string name="price1">Price</string>
+    <string name="cart1">Cart</string>
+    <string name="update_cart">Update Cart</string>
+    <string name="total">Total:</string>
+    <string name="checkout">Checkout</string>
+    <string name="back5">Back</string>
 </resources>
