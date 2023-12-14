@@ -274,4 +274,8 @@ public class MainActivity extends AppCompatActivity {
         // Return the configured Intent
         return intent;
     }
+
+    public int getUserId() {
+        return mUserId;
+    }
 }
