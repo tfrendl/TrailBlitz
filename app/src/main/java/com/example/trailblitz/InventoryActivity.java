@@ -86,7 +86,19 @@ public class InventoryActivity extends AppCompatActivity {
         mButtonAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: implement
+                String itemName = mItemPrompt.getText().toString();
+                if (checkIfInDatabase(itemName)) {
+                    // if in database, check if there are enough in stock
+                    int inStock = mTrailBlitzDAO.getQuantityByItem(itemName);
+                    int requestQuan = getInputQuantity();
+                    if (requestQuan <= inStock) {
+                        String toast = "Added to Cart";
+                        makeToast(toast);
+                    } else {
+                        String toast = "Not enough in stock";
+                        makeToast(toast);
+                    }
+                }
             }
         });
 
@@ -105,12 +117,28 @@ public class InventoryActivity extends AppCompatActivity {
                     TrailBlitz item = getInputValues();
                     if (item != null) {
                         mTrailBlitzDAO.update(item);
-
                     }
                 }
             }
         });
     }
+
+    private void makeToast(String toast) {
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    private int getInputQuantity() {
+        int quantity = 0;
+        String quantityString = mQuantityPrompt.getText().toString();
+        try {
+            quantity = Integer.parseInt(quantityString);
+        } catch (NumberFormatException e) {
+            Log.d("TRAILBLITZ", "couldn't convert quantity");
+            return 0;
+        }
+        return quantity;
+    }
+
 
     private TrailBlitz getInputValues() {
         TrailBlitz trailBlitzItem;
@@ -175,6 +203,8 @@ public class InventoryActivity extends AppCompatActivity {
         if (mTrailBlitz != null) {
             return true;
         }
+
+        Toast.makeText(this, itemName + " not in stock", Toast.LENGTH_SHORT).show();
         return false;
     }
 
