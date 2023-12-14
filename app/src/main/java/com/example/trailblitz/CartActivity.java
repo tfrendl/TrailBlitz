@@ -21,7 +21,10 @@ import org.w3c.dom.Text;
 public class CartActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.trailblitz.userIdKey";
     private static final String PREFERENCES_KEY = "com.example.trailblitz.PREFERENCES_KEY";
-    private TextView mViewCartText;
+    private TextView mTextCart;
+    private TextView mShowItems;
+    private TextView mShowPrices;
+    private TextView mShowQuantity;
     private TextView mTextItem;
     private TextView mTextQuantity;
     private TextView mTextPrice;
@@ -66,11 +69,18 @@ public class CartActivity extends AppCompatActivity {
             quantity[i] = mTrailBlitzDAO.getQuantityByUserId(mUserId, items[i], false);
             price[i] = mTrailBlitzDAO.getPriceByItem(items[i]);
         }
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sbItems = new StringBuilder();
+        StringBuilder sbPrices = new StringBuilder();
+        StringBuilder sbQuantity = new StringBuilder();
+
         for (int i = 0; i < items.length; i++) {
-            sb.append(items[i] + "     $" + price[i] + "      " + quantity[i] + "\n");
+            sbItems.append(items[i] + "\n");
+            sbPrices.append("$" + price[i] + "\n");
+            sbQuantity.append(quantity[i] + "\n");
         }
-        mShowUserCart.setText(sb.toString());
+        mShowUserCart.setText(sbItems.toString());
+        mShowQuantity.setText(sbQuantity.toString());
+        mShowPrices.setText(sbPrices.toString());
 
         double totalCost = getUsersTotalBalance();
         mShowUserTotal.setText("$" + Double.toString(totalCost));
@@ -99,8 +109,10 @@ public class CartActivity extends AppCompatActivity {
     private void wireUpDisplay() {
         mTextItem = findViewById(R.id.textView9Item);
         mTextQuantity = findViewById(R.id.textViewQuantity);
-        mViewCartText = findViewById(R.id.textViewCart);
+        mTextCart = findViewById(R.id.textViewCart);
         mShowUserCart = findViewById(R.id.textViewShowUsersCart);
+        mShowPrices = findViewById(R.id.showUserPrice);
+        mShowQuantity = findViewById(R.id.showUserQuantity);
         mTotalText = findViewById(R.id.textViewTotal);
         mShowUserTotal = findViewById(R.id.textViewTotalPrice);
         mButtonDelete = findViewById(R.id.buttonRemoveItem);
