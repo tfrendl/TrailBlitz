@@ -14,16 +14,18 @@ import android.widget.TextView;
 import com.example.trailblitz.db.AppDatabase;
 import com.example.trailblitz.db.TrailBlitzDAO;
 
-import java.util.List;
+import org.w3c.dom.Text;
 
 public class CartActivity extends AppCompatActivity {
     private static final String USER_ID_KEY = "com.example.trailblitz.userIdKey";
     private static final String PREFERENCES_KEY = "com.example.trailblitz.PREFERENCES_KEY";
     private TextView mViewCartText;
+    private TextView mTextItem;
+    private TextView mTextQuantity;
     private TextView mShowUserCart;
     private TextView mTotalText;
     private TextView mShowUserTotal;
-    private Button mButtonUpdateCart;
+    private Button mButtonDelete;
     private Button mButtonCheckout;
     private Button mButtonBack;
     private TrailBlitzDAO mTrailBlitzDAO;
@@ -69,15 +71,17 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void wireUpDisplay() {
+        mTextItem = findViewById(R.id.textView9Item);
+        mTextQuantity = findViewById(R.id.textViewQuantity);
         mViewCartText = findViewById(R.id.textViewCart);
         mShowUserCart = findViewById(R.id.textViewShowUsersCart);
         mTotalText = findViewById(R.id.textViewTotal);
         mShowUserTotal = findViewById(R.id.textViewTotalPrice);
-        mButtonUpdateCart = findViewById(R.id.buttonUpdateCart);
+        mButtonDelete = findViewById(R.id.buttonRemoveItem);
         mButtonCheckout = findViewById(R.id.buttonCheckout);
         mButtonBack = findViewById(R.id.buttonBack5);
 
-        mButtonUpdateCart.setOnClickListener(new View.OnClickListener() {
+        mButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: implement

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textV"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CartActivity">
@@ -20,8 +21,8 @@
 
     <TextView
         android:id="@+id/textViewShowUsersCart"
-        android:layout_width="345dp"
-        android:layout_height="244dp"
+        android:layout_width="340dp"
+        android:layout_height="183dp"
         android:layout_marginTop="24dp"
         android:text="@+id/showUsersCart"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,22 +30,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewCart" />
 
     <Button
-        android:id="@+id/buttonUpdateCart"
+        android:id="@+id/buttonRemoveItem"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/update_cart"
+        android:layout_marginTop="24dp"
+        android:text="@string/remove_item"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewShowUsersCart" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRemoveItem" />
 
     <TextView
         android:id="@+id/textViewTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="232dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="240dp"
         android:fontFamily="sans-serif-thin"
         android:text="@string/total"
         android:textSize="24sp"
@@ -55,11 +56,12 @@
         android:id="@+id/buttonCheckout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="100dp"
         android:text="@string/checkout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpdateCart" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRemoveItem" />
 
     <Button
         android:id="@+id/buttonBack5"
@@ -79,11 +81,46 @@
         android:id="@+id/textViewTotalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="232dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="240dp"
         android:fontFamily="sans-serif-thin"
         android:text="@+id/showUsersTotal"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewTotal" />
+
+    <EditText
+        android:id="@+id/editTextRemoveItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/item_name2"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewShowUsersCart" />
+
+    <TextView
+        android:id="@+id/textView9Item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="92dp"
+        android:text="@string/item9"
+        app:layout_constraintBottom_toTopOf="@id/textViewShowUsersCart"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="68dp"
+        android:text="@string/quantity4"
+        app:layout_constraintBottom_toTopOf="@id/textViewShowUsersCart"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
