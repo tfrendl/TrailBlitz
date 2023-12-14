@@ -21,6 +21,7 @@ import com.example.trailblitz.db.TrailBlitzDAO;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InventoryActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class InventoryActivity extends AppCompatActivity {
     private EditText mPriceEntry;
     boolean editMode = false;
     private TrailBlitz mTrailBlitz;
+    private HashMap<String, Integer> mCart = new HashMap<>();
 
 
     @Override
@@ -92,8 +94,21 @@ public class InventoryActivity extends AppCompatActivity {
                     int inStock = mTrailBlitzDAO.getQuantityByItem(itemName);
                     int requestQuan = getInputQuantity();
                     if (requestQuan <= inStock) {
-                        String toast = "Added to Cart";
-                        makeToast(toast);
+                        if (mCart.containsKey(itemName)) {
+                            int inCart = mCart.get(itemName);
+                            if (inCart + requestQuan <= inStock) {
+                                mCart.put(itemName, requestQuan + inCart);
+                                String toast = "Added to Cart";
+                                makeToast(toast);
+                            } else {
+                                String toast = "You have them all in your cart!";
+                                makeToast(toast);
+                            }
+                        } else {
+                            String toast = "Added to Cart";
+                            mCart.put(itemName, requestQuan);
+                            makeToast(toast);
+                        }
                     } else {
                         String toast = "Not enough in stock";
                         makeToast(toast);
@@ -101,6 +116,7 @@ public class InventoryActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         mButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
