@@ -60,12 +60,14 @@ public class CartActivity extends AppCompatActivity {
             mShowUserCart.setText("No items in cart");
         }
         int[] quantity = new int[items.length];
+        double[] price = new double[items.length];
         for (int i = 0; i < items.length; i++) {
             quantity[i] = mTrailBlitzDAO.getQuantityByUserId(mUserId, items[i], false);
+            price[i] = mTrailBlitzDAO.getPriceByItem(items[i]);
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < items.length; i++) {
-            sb.append(items[i] + "      " + quantity[i] + "\n");
+            sb.append(items[i] + "     $" + price[i] + "      " + quantity[i] + "\n");
         }
         mShowUserCart.setText(sb.toString());
 
