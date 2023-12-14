@@ -96,7 +96,13 @@ public interface TrailBlitzDAO {
     @Delete
     void delete(Purchase... Purchase);
 
-    @Query("SELECT mQuantity FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId")
-    int getQuantityByUserId(int userId);
+    @Query("SELECT mQuantity FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mItemName = :itemName and mHasPurchased = :hasPurchased")
+    int getQuantityByUserId(int userId, String itemName, boolean hasPurchased);
+
+    @Query("SELECT * FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mItemName = :item AND mHasPurchased = :hasPurchased")
+    Purchase getIfInCartByItem(String item, boolean hasPurchased);
+
+    @Query ("SELECT * FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mItemName = :itemName")
+    Purchase getItemInfoFromUserIdAndItemName(int userId, String itemName);
 
 }

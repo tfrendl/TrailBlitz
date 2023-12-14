@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InventoryActivity extends AppCompatActivity {
+    private static final String USER_ID_KEY = "com.example.trailblitz.userIdKey";
+    private static final String PREFERENCES_KEY = "com.example.trailblitz.PREFERENCES_KEY";
     private TextView mInventoryText;
     private RecyclerView mRecyclerViewItems;
     private EditText mItemPrompt;
@@ -35,7 +39,8 @@ public class InventoryActivity extends AppCompatActivity {
     private EditText mPriceEntry;
     boolean editMode = false;
     private TrailBlitz mTrailBlitz;
-    private HashMap<String, Integer> mCart = new HashMap<>();
+    private Purchase mPurchase;
+    private int mUserId;
 
 
     @Override
@@ -45,14 +50,19 @@ public class InventoryActivity extends AppCompatActivity {
         // check to see if in edit mode
         Intent receivedIntent = getIntent();
         editMode = receivedIntent.getBooleanExtra("editMode", false);
-
         getDatabase();
         wireUpDisplay();
+        setUserId();
         RecyclerView recyclerView = findViewById(R.id.recyclerViewInventory);
         setUpStoreModels();
         Store_RecyclerViewAdapter adapter = new Store_RecyclerViewAdapter(this, storeModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void setUserId() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
+        mUserId = sharedPreferences.getInt(USER_ID_KEY, -1);
     }
 
     private void getDatabase() {
@@ -91,10 +101,13 @@ public class InventoryActivity extends AppCompatActivity {
                     int inStock = mTrailBlitzDAO.getQuantityByItem(itemName);
                     int requestQuan = getInputQuantity();
                     if (requestQuan <= inStock) {
-                        if (mCart.containsKey(itemName)) {
-                            int inCart = mCart.get(itemName);
+                        // check how many are in cart
+                        if (checkIfInCart(itemName)) {
+                            int inCart = mTrailBlitzDAO.getQuantityByUserId(mUserId, itemName, false);
                             if (inCart + requestQuan <= inStock) {
-                                mCart.put(itemName, requestQuan + inCart);
+                                int newQuantity = inCart + requestQuan;
+                                mPurchase = mTrailBlitzDAO.getItemInfoFromUserIdAndItemName(mUserId, itemName);
+                                mPurchase.setQuantity(newQuantity);
                                 String toast = "Added to Cart";
                                 makeToast(toast);
                             } else {
@@ -102,8 +115,10 @@ public class InventoryActivity extends AppCompatActivity {
                                 makeToast(toast);
                             }
                         } else {
+                            double price = mTrailBlitzDAO.getPriceByItem(itemName);
+                            mPurchase = new Purchase(mUserId, itemName, price, requestQuan, false);
+                            mTrailBlitzDAO.insert(mPurchase);
                             String toast = "Added to Cart";
-                            mCart.put(itemName, requestQuan);
                             makeToast(toast);
                         }
                     } else {
@@ -135,6 +150,7 @@ public class InventoryActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void makeToast(String toast) {
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
@@ -218,6 +234,17 @@ public class InventoryActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, itemName + " not in stock", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    private boolean checkIfInCart(String itemName) {
+        mPurchase = mTrailBlitzDAO.getIfInCartByItem(itemName, false);
+        if (mPurchase != null) {
+            Toast.makeText(this, "adding to your cart", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        Toast.makeText(this, "first in cart!", Toast.LENGTH_SHORT).show();
         return false;
     }
 
