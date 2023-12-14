@@ -181,7 +181,8 @@ public class MainActivity extends AppCompatActivity {
         mUpdatePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the update password
+                Intent intent = new Intent(getApplicationContext(), ChangePassActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 

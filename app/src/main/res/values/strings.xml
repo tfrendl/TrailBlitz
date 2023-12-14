@@ -54,4 +54,11 @@
     <string name="update_item">Update Item</string>
     <string name="textPrice">Price</string>
     <string name="update_item1">Update Item</string>
+    <string name="update_password1">Update Password</string>
+    <string name="repeat_new_password">Repeat New Password</string>
+    <string name="new_password">New Password</string>
+    <string name="back4">Back</string>
+    <string name="update_password2">Update Password</string>
+    <string name="new_password2">New Password</string>
+    <string name="repeat_new_password1">Repeat New Password</string>
 </resources>
