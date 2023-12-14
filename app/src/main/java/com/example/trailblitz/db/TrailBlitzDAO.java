@@ -5,8 +5,12 @@ package com.example.trailblitz.db;
  import androidx.room.Insert;
  import androidx.room.Query;
  import androidx.room.Update;
+
+ import com.example.trailblitz.Purchase;
  import com.example.trailblitz.TrailBlitz;
  import com.example.trailblitz.User;
+ import com.example.trailblitz.db.AppDatabase;
+
  import java.util.List;
 
 /**
@@ -91,5 +95,8 @@ public interface TrailBlitzDAO {
 
     @Delete
     void delete(Purchase... Purchase);
+
+    @Query("SELECT mQuantity FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId")
+    int getQuantityByUserId(int userId);
 
 }
