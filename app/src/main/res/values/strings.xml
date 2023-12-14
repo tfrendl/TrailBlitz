@@ -73,4 +73,5 @@
     <string name="quantity4">Quantity</string>
     <string name="item_name2">Item Name</string>
     <string name="remove_item">Remove Item</string>
+    <string name="price2">Price</string>
 </resources>

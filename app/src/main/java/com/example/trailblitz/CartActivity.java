@@ -24,6 +24,7 @@ public class CartActivity extends AppCompatActivity {
     private TextView mViewCartText;
     private TextView mTextItem;
     private TextView mTextQuantity;
+    private TextView mTextPrice;
     private TextView mShowUserCart;
     private TextView mTotalText;
     private TextView mShowUserTotal;
@@ -106,6 +107,7 @@ public class CartActivity extends AppCompatActivity {
         mButtonCheckout = findViewById(R.id.buttonCheckout);
         mButtonBack = findViewById(R.id.buttonBack5);
         mItemPrompt = findViewById(R.id.editTextRemoveItem);
+        mTextPrice = findViewById(R.id.textView11Price);
 
         mButtonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
