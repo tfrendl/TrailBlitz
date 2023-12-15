@@ -74,4 +74,10 @@
     <string name="item_name2">Item Name</string>
     <string name="remove_item">Remove Item</string>
     <string name="price2">Price</string>
+    <string name="past_orders1">Past Orders</string>
+    <string name="order1">Order</string>
+    <string name="item4">Item</string>
+    <string name="quantity3">Quantity</string>
+    <string name="cost3">Cost</string>
+    <string name="textview3">TextView</string>
 </resources>

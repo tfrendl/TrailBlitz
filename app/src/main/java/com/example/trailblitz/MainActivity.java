@@ -165,7 +165,8 @@ public class MainActivity extends AppCompatActivity {
         mOrderHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the order history
+                Intent intent = new Intent(getApplicationContext(), PastOrdersActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 

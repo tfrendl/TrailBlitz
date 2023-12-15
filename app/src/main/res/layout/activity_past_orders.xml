@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PastOrdersActivity">
+
+    <TextView
+        android:id="@+id/textViewAllOrders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/past_orders1"
+        android:textSize="48sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewOrderNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="@string/order1"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.245"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/textViewItemOrdered"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewItemOrdered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="80dp"
+        android:text="@string/item4"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textViewAllOrders"
+        app:layout_constraintRight_toLeftOf="@id/textViewQuantity1"
+        tools:layout_editor_absoluteY="93dp" />
+
+    <TextView
+        android:id="@+id/textViewQuantity1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="36dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewAllOrders"
+        android:text="@string/quantity3"
+        android:textStyle="bold"
+        app:layout_constraintRight_toLeftOf="@id/textViewPrice1"
+        tools:layout_editor_absoluteY="93dp" />
+
+    <TextView
+        android:id="@+id/textViewPrice1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/cost3"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDisplayOrder"
+        android:layout_width="51dp"
+        android:layout_height="365dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="Orders"
+        app:layout_constraintEnd_toStartOf="@+id/textViewDisplayItem"
+        app:layout_constraintTop_toBottomOf="@id/textViewOrderNum"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="112dp" />
+
+    <TextView
+        android:id="@+id/textViewDisplayItem"
+        android:layout_width="139dp"
+        android:layout_height="366dp"
+        android:layout_marginEnd="24dp"
+        android:text="Items"
+        app:layout_constraintTop_toBottomOf="@id/textViewItemOrdered"
+        app:layout_constraintEnd_toStartOf="@+id/textViewDisplayQuantity"
+        tools:layout_editor_absoluteY="112dp" />
+
+    <TextView
+        android:id="@+id/textViewDisplayQuantity"
+        android:layout_width="62dp"
+        android:layout_height="365dp"
+        android:layout_marginEnd="16dp"
+        android:text="Quantities"
+        app:layout_constraintTop_toBottomOf="@id/textViewQuantity1"
+        app:layout_constraintEnd_toStartOf="@+id/textViewDisplayCost"
+        tools:layout_editor_absoluteY="113dp" />
+
+    <TextView
+        android:id="@+id/textViewDisplayCost"
+        android:layout_width="65dp"
+        android:layout_height="365dp"
+        android:layout_marginEnd="16dp"
+        android:text="Costs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPrice1" />
+
+    <Button
+        android:id="@+id/buttonAllOrdersBack"
+        android:layout_width="193dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="156dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
