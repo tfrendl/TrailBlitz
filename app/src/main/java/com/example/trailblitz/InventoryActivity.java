@@ -108,12 +108,12 @@ public class InventoryActivity extends AppCompatActivity {
                                 mPurchase = mTrailBlitzDAO.getIfInCartByItem(mUserId, itemName, false);
                                 mPurchase.setQuantity(mPurchase.getQuantity() + requestQuan);
                                 mTrailBlitzDAO.update(mPurchase);
-                                String toast = Integer.toString(mPurchase.getQuantity());
+                                String toast = (Integer.toString(mPurchase.getQuantity()) + " in your cart!");
                                 makeToast(toast);
-                                 toast = "Added to Cart";
+                                 toast = "Added to Cart!";
                                 makeToast(toast);
                             } else {
-                                String toast = "You have them all in your cart!";
+                                String toast = "No more in stock!";
                                 makeToast(toast);
                             }
                         } else {
@@ -124,7 +124,7 @@ public class InventoryActivity extends AppCompatActivity {
                             makeToast(toast);
                         }
                     } else {
-                        String toast = "Not enough in stock";
+                        String toast = "No more in stock!";
                         makeToast(toast);
                     }
                 }
@@ -242,11 +242,10 @@ public class InventoryActivity extends AppCompatActivity {
     private boolean checkIfInCart(String itemName) {
         mPurchase = mTrailBlitzDAO.getIfInCartByItem(mUserId, itemName, false);
         if (mPurchase != null) {
-            Toast.makeText(this, "adding to your cart", Toast.LENGTH_SHORT).show();
             return true;
         }
 
-        Toast.makeText(this, "first in cart!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Added to cart!", Toast.LENGTH_SHORT).show();
         return false;
     }
 
