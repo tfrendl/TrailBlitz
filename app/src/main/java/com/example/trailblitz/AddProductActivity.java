@@ -84,7 +84,7 @@ public class AddProductActivity extends AppCompatActivity {
             return null;
         }
 
-        if(mPricePrompt.getText().toString().trim().length() == 0) {
+        if(mQuantityPrompt.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "Enter an item quantity to add", Toast.LENGTH_SHORT).show();
             return null;
         }
