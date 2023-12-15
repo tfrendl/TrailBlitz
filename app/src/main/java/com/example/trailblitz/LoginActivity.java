@@ -100,17 +100,16 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                notification();
-                //getValuesFromDisplay();
+                getValuesFromDisplay();
                 if (checkForUserInDatabase()) {
                     if (!validatePassword()) {
                         Toast.makeText(LoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
                     } else {
-                        // if(!mUser.getIsAdmin()) {
-
-
-                    //   Intent intent = MainActivity.intentFactory(getApplicationContext(), mUser.getUserId());
-                     //  startActivity(intent);
+                        if (!isAdmin()) {
+                            notification();
+                        }
+                        Intent intent = MainActivity.intentFactory(getApplicationContext(), mUser.getUserId());
+                        startActivity(intent);
                     }
                 }
             }
@@ -126,6 +125,11 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent); // launch that activity
             }
         });
+    }
+
+    private boolean isAdmin() {
+        User user = mTrailBlitZDAO.getUserByUsername(mUsername);
+        return user.getIsAdmin();
     }
 
     private void notification() {
