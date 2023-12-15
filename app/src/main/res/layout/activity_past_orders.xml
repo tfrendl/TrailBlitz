@@ -25,42 +25,42 @@
         android:id="@+id/textViewOrderNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="92dp"
         android:text="@string/order1"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.245"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/textViewItemOrdered"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewItemOrdered"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="132dp"
         android:text="@string/item4"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/textViewAllOrders"
         app:layout_constraintRight_toLeftOf="@id/textViewQuantity1"
-        tools:layout_editor_absoluteY="93dp" />
+        app:layout_constraintTop_toBottomOf="@id/textViewAllOrders" />
 
     <TextView
         android:id="@+id/textViewQuantity1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="36dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewAllOrders"
+        android:layout_marginRight="24dp"
         android:text="@string/quantity3"
         android:textStyle="bold"
         app:layout_constraintRight_toLeftOf="@id/textViewPrice1"
-        tools:layout_editor_absoluteY="93dp" />
+        app:layout_constraintTop_toBottomOf="@id/textViewAllOrders" />
 
     <TextView
         android:id="@+id/textViewPrice1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginRight="52dp"
         android:text="@string/cost3"
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
