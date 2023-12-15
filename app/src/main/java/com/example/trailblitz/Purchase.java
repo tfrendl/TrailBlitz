@@ -9,6 +9,7 @@ import com.example.trailblitz.db.AppDatabase;
 @Entity(tableName = AppDatabase.PURCHASE_TABLE)
 public class Purchase {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "mTransaction")
     private int mTransaction;
 
     public int getTransaction() {

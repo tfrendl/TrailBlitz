@@ -38,6 +38,30 @@ public class PastOrdersActivity extends AppCompatActivity {
         getDatabase();
         wireUpDisplay();
         setUserId();
+        refreshDisplay();
+    }
+
+    private void refreshDisplay() {
+        int[] orderNums = mTrailBlitzDAO.getTransactionNumbers(mUserId, true);
+        String[] items = mTrailBlitzDAO.getItemsInCart(mUserId, true);
+        int[] quantity = mTrailBlitzDAO.getallQuantitites(mUserId, true);
+        double[] charges = mTrailBlitzDAO.getAllCharges(mUserId, true);
+        StringBuilder sbOrders = new StringBuilder();
+        StringBuilder sbItems = new StringBuilder();
+        StringBuilder sbQuantities = new StringBuilder();
+        StringBuilder sbCharges = new StringBuilder();
+
+        for(int i = 0; i < orderNums.length; i++) {
+            sbOrders.append(orderNums[i] + "\n");
+            sbItems.append(items[i] + "\n");
+            sbQuantities.append(quantity[i] + "\n");
+            sbCharges.append(charges[i] + "\n");
+        }
+
+        mDisplayOrderNums.setText(sbOrders.toString());
+        mDisplayItems.setText(sbItems.toString());
+        mDisplayQuantity.setText(sbQuantities.toString());
+        mDisplayCost.setText(sbCharges.toString());
     }
 
     private void setUserId() {

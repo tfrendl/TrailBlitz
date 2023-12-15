@@ -98,6 +98,8 @@ public interface TrailBlitzDAO {
 
     @Query("SELECT mQuantity FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mItemName = :itemName and mHasPurchased = :hasPurchased")
     int getQuantityByUserId(int userId, String itemName, boolean hasPurchased);
+    @Query("SELECT mQuantity FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mHasPurchased = :hasPurchased")
+    int[] getallQuantitites(int userId, boolean hasPurchased);
 
     @Query("SELECT * FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mItemName = :item AND mHasPurchased = :hasPurchased")
     Purchase getIfInCartByItem(int userId, String item, boolean hasPurchased);
@@ -113,6 +115,12 @@ public interface TrailBlitzDAO {
 
     @Query ("SELECT * FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mHasPurchased = :hasPurchased")
     Purchase[] getAllBeingPurchased(int userId, Boolean hasPurchased);
+
+    @Query("SELECT mTransaction FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId =:userId AND mHasPurchased =:hasPurchased")
+    int[] getTransactionNumbers(int userId, Boolean hasPurchased);
+
+    @Query("SELECT mItemPrice FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId =:userId AND mHasPurchased =:hasPurchased")
+    double[] getAllCharges(int userId, Boolean hasPurchased);
 
 
 

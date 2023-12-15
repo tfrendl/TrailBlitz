@@ -34,6 +34,7 @@ public class AddProductActivity extends AppCompatActivity {
         wireUpDisplay();
     }
 
+
     private void getDatabase() {
         mTrailBlitzDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()   // generally do not want to do on main thread
