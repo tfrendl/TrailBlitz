@@ -179,6 +179,16 @@ public class InventoryActivity extends AppCompatActivity {
         boolean updatePrice = false;
         boolean updateQuantity = false;
 
+        if(mItemPrompt.getText().toString().trim().length() == 0) {
+            Toast.makeText(this, "Enter an item to edit", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        if(mPriceEntry.getText().toString().trim().length() == 0 && mQuantityPrompt.getText().toString().trim().length() == 0) {
+            Toast.makeText(this, "Enter a price or quantity edit", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
         itemName = mItemPrompt.getText().toString();
         String priceString = mPriceEntry.getText().toString();
 
