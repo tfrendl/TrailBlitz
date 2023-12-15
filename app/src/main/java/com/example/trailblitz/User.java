@@ -1,5 +1,6 @@
 package com.example.trailblitz;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import com.example.trailblitz.db.AppDatabase;
@@ -20,10 +21,16 @@ public class User {
      * Unique identifier (primary key) for the User, automatically generated.
      */
     @PrimaryKey(autoGenerate = true)    // uniquely identifies data in database
+    @ColumnInfo(name = "mUserId")
     private int mUserId;
 
+    @ColumnInfo(name = "mUserName")
     private String mUserName;
+
+    @ColumnInfo(name = "mPassword")
     private String mPassword;
+
+    @ColumnInfo(name = "mIsAdmin")
     private boolean mIsAdmin;
 
     /**
@@ -109,5 +116,16 @@ public class User {
      */
     public void setIsAdmin(boolean isAdmin) {
         this.mIsAdmin = isAdmin;
+    }
+
+    @Override
+    public String toString(){
+        String output;
+
+        output = mUserName + " " + mPassword + " " + mIsAdmin;
+        output += "\n";
+        output += "userId == " + mUserId;
+
+        return output;
     }
 }

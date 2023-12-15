@@ -1,8 +1,9 @@
 package com.example.trailblitz.db;
 
 import androidx.room.Database;
-import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.example.trailblitz.Purchase;
 import com.example.trailblitz.TrailBlitz;
 import com.example.trailblitz.User;
 
@@ -16,7 +17,7 @@ import com.example.trailblitz.User;
  *
  * @version 2 The version of the database schema.
  */
-@Database(entities = {TrailBlitz.class, User.class, Purchase.class}, version = 3)
+@Database(entities = {TrailBlitz.class, User.class, Purchase.class}, version = 5)
 public abstract class AppDatabase extends RoomDatabase {
     // The name of the database
     public static final String DB_NAME = "TRAILBLITZ_DATABASE";
@@ -25,7 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
     // Three tables in database
     public static final String TRAILBLITZ_TABLE = "TRAILBLITZ_TABLE";
     public static final String USER_TABLE = "USER_TABLE";
-    public static final String PURCHASE_TABLE = " PURCHASE_TABLE";
+    public static final String PURCHASE_TABLE = "PURCHASE_TABLE";
 
     /**
      * Retrieves the Data Access Object (DAO) for TrailBlitz entities.

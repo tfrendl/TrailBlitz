@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mSignOutButton;
     private TextView mUserNameTextView;
 
+
     // Database and user-related fields
     private TrailBlitzDAO mTrailBlitzDAO;
     private int mUserId = -1;   // default value when there is no user yet defined
@@ -115,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
     private void loginUser(int userId) {
         mUser = mTrailBlitzDAO.getUserByUserId(userId);
         addUserToPreference(userId);
-        invalidateOptionsMenu();
     }
 
     /**
@@ -146,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
         mInventoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the inventory
+                Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                intent.putExtra("editMode", false);
+                startActivity(intent); // launch that activity
             }
         });
 
@@ -154,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
         mCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the cart
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 
@@ -162,7 +165,8 @@ public class MainActivity extends AppCompatActivity {
         mOrderHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the order history
+                Intent intent = new Intent(getApplicationContext(), PastOrdersActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 
@@ -170,7 +174,8 @@ public class MainActivity extends AppCompatActivity {
         mAdminControlsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the admin controls
+                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 
@@ -178,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
         mUpdatePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for accessing the update password
+                Intent intent = new Intent(getApplicationContext(), ChangePassActivity.class);
+                startActivity(intent); // launch that activity
             }
         });
 
@@ -241,8 +247,7 @@ public class MainActivity extends AppCompatActivity {
                     clearUserFromPref();
                     mUserId = -1;
                     checkForUser();
-                    // TODO: Finish the implementation for logging the user out
-                    // TODO: the next two lines should probably get moved there
+                    // go back to Login activity
                     Intent intent = LoginActivity.intentFactory(this);
                     startActivity(intent);
                 });
@@ -270,5 +275,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Return the configured Intent
         return intent;
+    }
+
+    public int getUserId() {
+        return mUserId;
     }
 }

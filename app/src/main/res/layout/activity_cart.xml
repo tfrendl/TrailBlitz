@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textV"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CartActivity">
+
+    <TextView
+        android:id="@+id/textViewCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/cart1"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewShowUsersCart"
+        android:layout_width="108dp"
+        android:layout_height="188dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@+id/showUsersCart"
+        app:layout_constraintRight_toLeftOf="@id/showUserPrice"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/textView9Item"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="115dp" />
+
+    <Button
+        android:id="@+id/buttonRemoveItem"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/remove_item"
+        app:layout_constraintBottom_toTopOf="@id/buttonCheckout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRemoveItem"
+        android:backgroundTint="@color/green"/>
+
+    <TextView
+        android:id="@+id/textViewTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="240dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/total"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewShowUsersCart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/buttonCheckout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/checkout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintBottom_toTopOf="@id/buttonBack5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRemoveItem"
+        android:backgroundTint="@color/green"/>
+
+    <Button
+        android:id="@+id/buttonBack5"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/back5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCheckout"
+        app:layout_constraintVertical_bias="0.0"
+        android:backgroundTint="@color/green"/>
+
+    <TextView
+        android:id="@+id/textViewTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="240dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@+id/showUsersTotal"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTotal" />
+
+    <EditText
+        android:id="@+id/editTextRemoveItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/item_name2"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/buttonRemoveItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/showUserPrice" />
+
+    <TextView
+        android:id="@+id/textView9Item"
+        android:layout_width="36dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="sans-serif-thin"
+
+        android:text="@string/item9"
+
+
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/quantity4"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/price2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/textViewShowUsersCart"
+        app:layout_constraintEnd_toStartOf="@+id/textViewQuantity"
+        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintStart_toEndOf="@id/textView9Item"
+        app:layout_constraintTop_toBottomOf="@id/textViewCart"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/showUserPrice"
+        android:layout_width="68dp"
+        android:layout_height="189dp"
+        android:fontFamily="sans-serif-thin"
+        app:layout_constraintTop_toBottomOf="@id/textView11Price"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/textViewShowUsersCart"
+        app:layout_constraintRight_toLeftOf="@id/showUserQuantity"
+        app:layout_constraintStart_toStartOf="parent"
+
+        tools:layout_editor_absoluteY="115dp" />
+
+    <TextView
+        android:id="@+id/showUserQuantity"
+        android:layout_width="58dp"
+        android:layout_height="186dp"
+        android:layout_marginRight="40dp"
+        android:fontFamily="sans-serif-thin"
+        app:layout_constraintTop_toBottomOf="@id/textViewQuantity"
+
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="114dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

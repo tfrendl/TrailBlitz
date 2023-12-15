@@ -1,21 +1,33 @@
 package com.example.trailblitz;
 
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.room.Room;
 
 import com.example.trailblitz.db.AppDatabase;
 import com.example.trailblitz.db.TrailBlitzDAO;
+
 /**
  * @author Talia Frendl
- * @since  November 30, 2023
+ * @since November 30, 2023
  * Assignment: Project 02: Part 02 Login and Landing Page
  * Used ChatGPT to help write javadoc comments.
  * LoginActivity represents the user interface for logging into the TrailBlitz application.
@@ -44,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param savedInstanceState The saved state of the activity.
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getDatabase();
@@ -76,18 +88,27 @@ public class LoginActivity extends AppCompatActivity {
 
         // Wire up buttons with their respective views
         mLoginButton = findViewById(R.id.buttonLogin);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         mNewAccountButton = findViewById(R.id.buttonNewUser);
 
         // Set up click listener for the Login button
         mLoginButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 getValuesFromDisplay();
-                if(checkForUserInDatabase()) {
+                if (checkForUserInDatabase()) {
                     if (!validatePassword()) {
                         Toast.makeText(LoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
                     } else {
-                        Intent intent = MainActivity.intentFactory(getApplicationContext(),mUser.getUserId());
+                        if (!isAdmin()) {
+                            notification();
+                        }
+                        Intent intent = MainActivity.intentFactory(getApplicationContext(), mUser.getUserId());
                         startActivity(intent);
                     }
                 }
@@ -98,10 +119,52 @@ public class LoginActivity extends AppCompatActivity {
         mNewAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Finish the implementation for creating a new account
-                // Add the necessary logic to handle creating a new account when the New Account Button is clicked
+                // specify the class of the activity I want to start
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                intent.putExtra("fromAdmin", false);
+                startActivity(intent); // launch that activity
             }
         });
+    }
+
+    private boolean isAdmin() {
+        User user = mTrailBlitZDAO.getUserByUsername(mUsername);
+        return user.getIsAdmin();
+    }
+
+    private void notification() {
+        // How to create notifications:
+        // https://stackoverflow.com/questions/13902115/how-to-create-a-notification-with-notificationcompat-builder
+        // How to create notification icons:
+        // https://developer.android.com/studio/write/create-app-icons#create-notification
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle("Welcome back!!")
+                .setContentText("Check for new inventory!");
+
+        mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Log.d("NotificationTest", "Notification method called");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "your_channel_id";
+            CharSequence channelName = "Your channel name";
+            int importance = NotificationManager.IMPORTANCE_HIGH; // Change this to IMPORTANCE_HIGH
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+
+            notificationManager = getSystemService(NotificationManager.class);
+
+            // Check if the channel already exists
+            if (notificationManager.getNotificationChannel(channelId) == null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+
+            mBuilder.setChannelId(channelId);
+        }
+
+        notificationManager.notify(1, mBuilder.build());
     }
 
     /**

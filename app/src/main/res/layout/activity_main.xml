@@ -39,7 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
+        android:backgroundTint="@color/green"/>
 
     <Button
         android:id="@+id/buttonCart"
@@ -50,7 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonInventory" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonInventory"
+        android:backgroundTint="@color/green"/>
 
     <Button
         android:id="@+id/buttonPastOrders"
@@ -61,7 +63,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCart" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCart"
+        android:backgroundTint="@color/green"/>
 
     <Button
         android:id="@+id/buttonUpdatePassword"
@@ -72,7 +75,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdminControls" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdminControls"
+        android:backgroundTint="@color/green"/>
 
     <Button
         android:id="@+id/buttonAdminControls"
@@ -83,7 +87,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPastOrders" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonPastOrders"
+        android:backgroundTint="@color/green"/>
 
     <Button
         android:id="@+id/buttonSignOut"
@@ -94,5 +99,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpdatePassword" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdatePassword"
+        android:backgroundTint="@color/green"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
