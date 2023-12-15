@@ -111,8 +111,9 @@ public interface TrailBlitzDAO {
     @Query("SELECT * FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mItemName = :itemName and mHasPurchased = :hasPurchased")
     Purchase getPurchase(int userId, String itemName, boolean hasPurchased);
 
-    @Query ("SELECT mItemName FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mHasPurchased = :hasPurchased")
-    String[] getAllCosts(int userId, Boolean hasPurchased);
+    @Query ("SELECT * FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId = :userId AND mHasPurchased = :hasPurchased")
+    Purchase[] getAllBeingPurchased(int userId, Boolean hasPurchased);
+
 
 
 

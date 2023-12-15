@@ -83,7 +83,7 @@ public class CartActivity extends AppCompatActivity {
         mShowPrices.setText(sbPrices.toString());
 
         double totalCost = getUsersTotalBalance();
-        mShowUserTotal.setText("$" + Double.toString(totalCost));
+        mShowUserTotal.setText("$" + totalCost);
     }
 
     private double getUsersTotalBalance() {
@@ -138,8 +138,7 @@ public class CartActivity extends AppCompatActivity {
         mButtonCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent); // launch that activity
+                purchaseItems();
             }
         });
 
@@ -150,6 +149,36 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(intent); // launch that activity
             }
         });
+    }
+
+    private void purchaseItems() {
+        Purchase[] purchases = mTrailBlitzDAO.getAllBeingPurchased(mUserId, false);
+        String[] itemNames = mTrailBlitzDAO.getItemsInCart(mUserId, false); // from Purchases
+        int quantity = 0;
+        int requestedQuantity = 0;
+        if (purchases.length <= 0) {
+            makeToast("No Items in Cart");
+            return;
+        }
+
+        // check Trailblitz inventory
+        TrailBlitz[] itemsBeingPurchased = new TrailBlitz[purchases.length];
+
+        for(int i = 0; i < itemsBeingPurchased.length; i++){
+            itemsBeingPurchased[i] = mTrailBlitzDAO.getTrailBlitzByItem(itemNames[i]);
+            // check quantity in TrailBlitz
+            quantity = mTrailBlitzDAO.getQuantityByItem(itemNames[i]);
+            requestedQuantity = mTrailBlitzDAO.getQuantityByUserId(mUserId, itemNames[i], false);
+            if (requestedQuantity <= quantity) {
+                purchases[i].setHasPurchased(true);
+                mTrailBlitzDAO.update(purchases[i]);
+                itemsBeingPurchased[i].setQuantity(quantity - requestedQuantity);
+                mTrailBlitzDAO.update(itemsBeingPurchased[i]);
+            } else {
+                makeToast("Not enough of " + itemNames[i] + " in stock.");
+            }
+        }
+        refreshDisplay();
     }
 
     private void makeToast(String toast) {
