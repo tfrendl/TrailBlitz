@@ -73,8 +73,21 @@ public class AddProductActivity extends AppCompatActivity {
         String itemName = "no item found";
         double price = 0;
         int quantity = 0;
-
+        // see if field is empty https://stackoverflow.com/questions/6290531/how-do-i-check-if-my-edittext-fields-are-empty
+        if(mProductPrompt.getText().toString().trim().length() == 0) {
+            Toast.makeText(this, "Enter an item name to add", Toast.LENGTH_SHORT).show();
+            return null;
+        }
         itemName = mProductPrompt.getText().toString();
+        if(mPricePrompt.getText().toString().trim().length() == 0) {
+            Toast.makeText(this, "Enter an item price to add", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        if(mPricePrompt.getText().toString().trim().length() == 0) {
+            Toast.makeText(this, "Enter an item quantity to add", Toast.LENGTH_SHORT).show();
+            return null;
+        }
         try {
             price = Double.parseDouble(mPricePrompt.getText().toString());
         } catch (NumberFormatException e) {
