@@ -43,7 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRemoveItem" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRemoveItem"
+        android:backgroundTint="@color/green"/>
 
     <TextView
         android:id="@+id/textViewTotal"
@@ -69,7 +70,8 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintBottom_toTopOf="@id/buttonBack5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRemoveItem" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRemoveItem"
+        android:backgroundTint="@color/green"/>
 
     <Button
         android:id="@+id/buttonBack5"
@@ -83,7 +85,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCheckout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:backgroundTint="@color/green"/>
 
     <TextView
         android:id="@+id/textViewTotalPrice"

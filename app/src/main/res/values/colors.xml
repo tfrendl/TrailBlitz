@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="forestgreen">#4a6741</color>
+    <color name="green">#235347</color>
+    <color name="tan">#B08F6A</color>
+    <color name="Bombay">#AEB3B6</color>
+    <color name="JudgeGray">#524132</color>
+    <color name="Shadow">#816646</color>
+    <color name="Bunker">#151F1E</color>
 </resources>

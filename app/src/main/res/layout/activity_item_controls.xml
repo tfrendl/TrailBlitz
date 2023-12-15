@@ -28,7 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewItemControls" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewItemControls"
+        android:backgroundTint="@color/green"/>
 
     <Button
         android:id="@+id/buttonAdminUpdatePrice"
@@ -39,7 +40,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdminAddItem" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdminAddItem"
+        android:backgroundTint="@color/green"/>
 
 
     <Button
@@ -53,6 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/green"
 
         app:layout_constraintTop_toBottomOf="@+id/buttonAdminUpdatePrice"
         app:layout_constraintVertical_bias="0.823" />

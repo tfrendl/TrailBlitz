@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AddProductActivity">
 
+
   <TextView
       android:id="@+id/textViewAddProduct"
       android:layout_width="wrap_content"
@@ -66,14 +67,16 @@
       android:textSize="15sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editTextQuan" />
+      app:layout_constraintTop_toBottomOf="@+id/editTextQuan"
+      android:backgroundTint="@color/green"/>
 
   <Button
       android:id="@+id/buttonProBack"
       android:layout_width="80dp"
       android:layout_height="80dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="40dp"
+      android:layout_marginStart="532dp"
+      android:layout_marginTop="52dp"
+      android:backgroundTint="@color/green"
       android:text="@string/back3"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
