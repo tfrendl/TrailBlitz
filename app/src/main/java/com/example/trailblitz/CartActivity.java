@@ -93,8 +93,8 @@ public class CartActivity extends AppCompatActivity {
         double total = 0.0;
 
         for (int i = 0; i < itemsInCart.length; i++) {
-            howManyOfEach[i] = mTrailBlitzDAO.getQuantityByUserId(mUserId, itemsInCart[0], false);
-            itemPrice[i] = mTrailBlitzDAO.getPriceByItem(itemsInCart[0]);
+            howManyOfEach[i] = mTrailBlitzDAO.getQuantityByUserId(mUserId, itemsInCart[i], false);
+            itemPrice[i] = mTrailBlitzDAO.getPriceByItem(itemsInCart[i]);
             total += (howManyOfEach[i] * itemPrice[i]);
         }
         total = (double) Math.round(total * 100.0) / 100.0; // https://stackoverflow.com/questions/11701399/round-up-to-2-decimal-places-in-java
