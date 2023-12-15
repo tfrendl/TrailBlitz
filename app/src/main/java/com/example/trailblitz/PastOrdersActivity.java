@@ -31,6 +31,8 @@ public class PastOrdersActivity extends AppCompatActivity {
     private Button mButtonBack;
     private TrailBlitzDAO mTrailBlitzDAO;
     private int mUserId;
+    private boolean isAdmin;
+    private User mUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,35 @@ public class PastOrdersActivity extends AppCompatActivity {
         getDatabase();
         wireUpDisplay();
         setUserId();
-        refreshDisplay();
+        if(!isAdmin) {
+            refreshDisplay();
+        } else {
+            adminRefreshDisplay();
+        }
+    }
+
+    private void adminRefreshDisplay() {
+        int[] orderNums = mTrailBlitzDAO.adminGetTransactionNumbers(true);
+        String[] items = mTrailBlitzDAO.adminGetAllBeingPurchased(true);
+        int[] quantity = mTrailBlitzDAO.adminGetAllQuantities(true);
+        double[] charges = mTrailBlitzDAO.adminGetAllCharges(true);
+
+        StringBuilder sbOrders = new StringBuilder();
+        StringBuilder sbItems = new StringBuilder();
+        StringBuilder sbQuantities = new StringBuilder();
+        StringBuilder sbCharges = new StringBuilder();
+
+        for(int i = 0; i < orderNums.length; i++) {
+            sbOrders.append(orderNums[i] + "\n");
+            sbItems.append(items[i] + "\n");
+            sbQuantities.append(quantity[i] + "\n");
+            sbCharges.append(charges[i] + "\n");
+        }
+
+        mDisplayOrderNums.setText(sbOrders.toString());
+        mDisplayItems.setText(sbItems.toString());
+        mDisplayQuantity.setText(sbQuantities.toString());
+        mDisplayCost.setText(sbCharges.toString());
     }
 
     private void refreshDisplay() {
@@ -46,6 +76,7 @@ public class PastOrdersActivity extends AppCompatActivity {
         String[] items = mTrailBlitzDAO.getItemsInCart(mUserId, true);
         int[] quantity = mTrailBlitzDAO.getallQuantitites(mUserId, true);
         double[] charges = mTrailBlitzDAO.getAllCharges(mUserId, true);
+
         StringBuilder sbOrders = new StringBuilder();
         StringBuilder sbItems = new StringBuilder();
         StringBuilder sbQuantities = new StringBuilder();
@@ -67,6 +98,8 @@ public class PastOrdersActivity extends AppCompatActivity {
     private void setUserId() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         mUserId = sharedPreferences.getInt(USER_ID_KEY, -1);
+
+        isAdmin = mTrailBlitzDAO.checkIfAdmin(mUserId);
     }
 
     private void getDatabase() {

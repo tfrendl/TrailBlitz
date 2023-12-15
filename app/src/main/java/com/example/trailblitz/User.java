@@ -21,6 +21,7 @@ public class User {
      * Unique identifier (primary key) for the User, automatically generated.
      */
     @PrimaryKey(autoGenerate = true)    // uniquely identifies data in database
+    @ColumnInfo(name = "mUserId")
     private int mUserId;
 
     @ColumnInfo(name = "mUserName")

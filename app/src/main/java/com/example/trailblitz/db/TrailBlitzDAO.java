@@ -84,6 +84,9 @@ public interface TrailBlitzDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :userId")
     User getUserByUserId(int userId);
 
+    @Query("SELECT mIsAdmin FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :userId")
+    boolean checkIfAdmin(int userId);
+
     /**
      * Purchases Table
      */
@@ -121,6 +124,20 @@ public interface TrailBlitzDAO {
 
     @Query("SELECT mItemPrice FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mUserId =:userId AND mHasPurchased =:hasPurchased")
     double[] getAllCharges(int userId, Boolean hasPurchased);
+
+    @Query("SELECT mTransaction FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mHasPurchased =:hasPurchased")
+    int[] adminGetTransactionNumbers(Boolean hasPurchased);
+
+    @Query("SELECT mItemPrice FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mHasPurchased =:hasPurchased")
+    double[] adminGetAllCharges(Boolean hasPurchased);
+
+    @Query ("SELECT mItemName FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mHasPurchased = :hasPurchased")
+    String[] adminGetAllBeingPurchased(Boolean hasPurchased);
+
+    @Query ("SELECT mQuantity FROM " + AppDatabase.PURCHASE_TABLE + " WHERE mHasPurchased = :hasPurchased")
+    int[] adminGetAllQuantities(Boolean hasPurchased);
+
+
 
 
 
